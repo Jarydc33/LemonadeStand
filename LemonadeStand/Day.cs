@@ -5,16 +5,23 @@ using System.Text;
 namespace LemonadeStand
 {
     public class Day
-    {
-        public Weather DailyWeather;
+    {        
         public Weather Forecast;
+        public int temp;
+        public int SevenDay;
 
-        public Day()
+        public Day(int DaysLeft, int CurrentDay)
         {
-            DailyWeather = new Weather();
-            Forecast = new Weather();
+            Forecast = new Weather(DaysLeft, CurrentDay);
+            GetDaily();
         }
 
+        public void GetDaily()
+        {
+            Forecast.SevenForecast();
+            temp = Forecast.DailyWeather();
+            
+        }
 
     }
 }
