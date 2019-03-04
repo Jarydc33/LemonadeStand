@@ -28,6 +28,7 @@ namespace LemonadeStand
             Console.WriteLine("To view your current inventory, type inventory \n");
             Console.WriteLine("To visit the store, type store \n");
             Console.WriteLine("To start the next day, type start \n");
+            Console.WriteLine("To change your current recipe, type recipe \n");
             string WhatNext = Console.ReadLine();
             return WhatNext;
         }
@@ -80,5 +81,20 @@ namespace LemonadeStand
             int AmountPurchased = int.Parse(Console.ReadLine());
             return AmountPurchased;
         }
+
+        public int[] ChangeRecipe()
+        {
+            int[] Recipe = new int[3];
+            Console.WriteLine("The recipe will consist of a combination of lemons, sugar, and ice. The more lemons, the more sour it will be." +
+                "The more sugar, the sweeter and so on.");
+            Console.WriteLine("How many lemons would you like to add?");
+            Recipe[0] = int.Parse(Console.ReadLine());
+            Console.WriteLine("How many pounds of sugar would you like to add?");
+            Recipe[1] = int.Parse(Console.ReadLine());
+            Console.WriteLine("How many bags of ice would you like to add?");
+            Recipe[2] = int.Parse(Console.ReadLine());
+            return Recipe;
+        }
+                
     }
 }

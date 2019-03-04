@@ -75,6 +75,12 @@ namespace LemonadeStand
                     GamePlay();
                     break;
 
+                case "recipe":
+                    int[]Recipe = UserInterface.ChangeRecipe();
+                    MyPlayer.MyRecipe.ChangeRecipe(Recipe);
+                    GamePlay();
+                    break;
+
                 case "start":
 
                     break;
