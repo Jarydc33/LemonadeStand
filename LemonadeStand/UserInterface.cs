@@ -37,6 +37,22 @@ namespace LemonadeStand
             Console.WriteLine("The current temperature is: " + temp + ".");
         }
 
+        public void OutputWeekly(int[]forecast)
+        {
+            Console.WriteLine("The weather forecast is: ");
+            for(int i = 0; i < forecast.Length; i++)
+            {
+                Console.WriteLine(forecast[i]);
+            }
 
+        }
+
+        public void ViewInventory(int lemons, int sugar, int vodka, int ice)
+        {
+            Console.Write("Your current inventory is: " + lemons + " lemons, ");
+            Console.Write(sugar + " pounds of sugar, ");
+            Console.Write(vodka + " bottles of vodka, and ");
+            Console.Write(ice + " bags of ice. \n");
+        }
     }
 }

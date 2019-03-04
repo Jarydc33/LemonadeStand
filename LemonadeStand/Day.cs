@@ -7,20 +7,27 @@ namespace LemonadeStand
     public class Day
     {        
         public Weather Forecast;
-        public int temp;
-        public int SevenDay;
+        public int[] temp;
+        public int[] SevenDay;
 
         public Day(int DaysLeft, int CurrentDay)
         {
             Forecast = new Weather(DaysLeft, CurrentDay);
+            SevenDay = new int[DaysLeft-1];
+            temp = new int[1];
+            SevenDayForecast();
             GetDaily();
         }
 
         public void GetDaily()
         {
-            Forecast.SevenForecast();
-            temp = Forecast.DailyWeather();
+            temp[0] = Forecast.DailyWeather();
             
+        }
+
+        public void SevenDayForecast()
+        {
+            SevenDay = Forecast.SevenForecast();
         }
 
     }

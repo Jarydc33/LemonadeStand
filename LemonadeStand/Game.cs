@@ -51,17 +51,20 @@ namespace LemonadeStand
             switch (WhatNext)
             {
                 case "daily":
-                    int temp = DetermineDay();
-                    UserInterface.OutputDaily(temp);
+                    int[] temp = DetermineDay("daily");
+                    UserInterface.OutputDaily(temp[0]);
                     GamePlay();
                     break;
 
                 case "weekly":
-
+                    int[] forecast = DetermineDay("weekly");
+                    UserInterface.OutputWeekly(forecast);
+                    GamePlay();
                     break;
 
                 case "inventory":
-
+                    UserInterface.ViewInventory(MyPlayer.MyInventory.Lemons, MyPlayer.MyInventory.Sugar, MyPlayer.MyInventory.Vodka, MyPlayer.MyInventory.Ice);
+                    GamePlay();
                     break;
 
                 case "store":
@@ -74,40 +77,88 @@ namespace LemonadeStand
             }
         }
 
-        public int DetermineDay()
+        public int[] DetermineDay(string which)
         {
             switch (counter)
             {
                 case 0:
                     //need to increase counter once day two starts
-                    Day1 = new Day(7, 1);
-                    return Day1.temp;
-
+                    if(which == "daily")
+                    {
+                        Day1 = new Day(7, 1);
+                        return Day1.temp;
+                    }
+                    else
+                    {
+                        return Day1.SevenDay;
+                    }
                 case 1:
-                    Day2 = new Day(6, 2);
-                    return Day2.temp;
+                    if (which == "daily")
+                    {
+                        Day2 = new Day(6, 2);
+                        return Day2.temp;
+                    }
+                    else
+                    {
+                        return Day2.SevenDay;
+                    }
 
                 case 2:
-                    Day3 = new Day(5, 3);
-                    return Day3.temp;
+                    if (which == "daily")
+                    {
+                        Day3 = new Day(5, 3);
+                        return Day3.temp;
+                    }
+                    else
+                    {
+                        return Day3.SevenDay;
+                    }
 
                 case 3:
-                    Day4 = new Day(4, 4);
-                    return Day4.temp;
+                    if (which == "daily")
+                    {
+                        Day4 = new Day(4, 4);
+                        return Day4.temp;
+                    }
+                    else
+                    {
+                        return Day4.SevenDay;
+                    }
 
                 case 4:
-                    Day5 = new Day(3, 5);
-                    return Day5.temp;
+                    if (which == "daily")
+                    {
+                        Day5 = new Day(3, 5);
+                        return Day5.temp;
+                    }
+                    else
+                    {
+                        return Day5.SevenDay;
+                    }
 
                 case 5:
-                    Day6 = new Day(2, 6);
-                    return Day6.temp;
+                    if (which == "daily")
+                    {
+                        Day6 = new Day(2, 6);
+                        return Day6.temp;
+                    }
+                    else
+                    {
+                        return Day6.SevenDay;
+                    }
 
                 case 6:
-                    Day7 = new Day(1, 7);
-                    return Day7.temp;
+                    if (which == "daily")
+                    {
+                        Day7 = new Day(1, 7);
+                        return Day7.temp;
+                    }
+                    else
+                    {
+                        return Day7.SevenDay;
+                    }
             }
-            return 0;
+            return Day1.temp;
         }
        
     }

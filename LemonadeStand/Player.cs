@@ -19,8 +19,8 @@ namespace LemonadeStand
             MyMoney = 100;
             MyPrice = 0.00;
             MyName = myname;
-            
-        }
 
+        }
     }
+       
 }

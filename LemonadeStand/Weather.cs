@@ -18,13 +18,14 @@ namespace LemonadeStand
             CurrentDay = currentday - 1;
         }
 
-        public void SevenForecast()
+        public int[] SevenForecast()
         {
             for (int i = 0; i < DaysLeft; i++)
             {
                 System.Random rnd = new System.Random();
                 TempPlace[i] = rnd.Next(69, 90);
             }
+            return TempPlace;
         }
 
         public int DailyWeather()
