@@ -8,7 +8,7 @@ namespace LemonadeStand
     {
         public Inventory MyInventory;
         public Recipe MyRecipe;
-        public int MyMoney;
+        public double MyMoney;
         public double MyPrice;
         public string MyName;
 

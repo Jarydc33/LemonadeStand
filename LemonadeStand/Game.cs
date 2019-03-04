@@ -63,16 +63,25 @@ namespace LemonadeStand
                     break;
 
                 case "inventory":
-                    UserInterface.ViewInventory(MyPlayer.MyInventory.Lemons, MyPlayer.MyInventory.Sugar, MyPlayer.MyInventory.Vodka, MyPlayer.MyInventory.Ice);
+                    UserInterface.ViewInventory(MyPlayer.MyInventory.TotalInventory, MyPlayer.MyMoney);
                     GamePlay();
                     break;
 
                 case "store":
-
+                    string UserInput = UserInterface.StorePrices(GameStore.StorePrices);
+                    int AmountPurchased = UserInterface.PurchaseAmount();
+                    PurchaseItems(UserInput, AmountPurchased);
+                    UserInterface.ViewInventory(MyPlayer.MyInventory.TotalInventory, MyPlayer.MyMoney);
+                    GamePlay();
                     break;
 
                 case "start":
 
+                    break;
+
+                default:
+                    UserInterface.DefaultResponse();
+                    GamePlay();
                     break;
             }
         }
@@ -160,6 +169,31 @@ namespace LemonadeStand
             }
             return Day1.temp;
         }
-       
+
+        public void PurchaseItems(string UserInput, int TotalPurchased) {
+
+            switch (UserInput)
+            {
+                case "lemons":
+                    MyPlayer.MyMoney = GameStore.Cashier(1, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    break;
+
+                case "sugar":
+                    MyPlayer.MyMoney = GameStore.Cashier(2, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    break;
+
+                case "vodka":
+                    MyPlayer.MyMoney = GameStore.Cashier(3, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    break;
+
+                case "ice":
+                    MyPlayer.MyMoney = GameStore.Cashier(4, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    break;
+
+                case "cups":
+                    MyPlayer.MyMoney = GameStore.Cashier(5, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    break;
+            }
+        }
     }
 }
