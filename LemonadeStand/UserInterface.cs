@@ -95,6 +95,10 @@ namespace LemonadeStand
             Recipe[2] = int.Parse(Console.ReadLine());
             return Recipe;
         }
-                
+        
+        public void CustomerPurchase()
+        {
+            Console.WriteLine("");
+        }
     }
 }

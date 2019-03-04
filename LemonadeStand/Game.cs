@@ -27,10 +27,10 @@ namespace LemonadeStand
         {
             UserInterface = new UserInterface();
             GameStore = new Store();
-            Russian = new Customer(4, false);
-            American = new Customer(1, true);
-            Duck = new Customer(2, false);
-            Thor = new Customer(3, true);
+            Russian = new Customer(4, 3, "Igor the Russian");
+            American = new Customer(1, 3, "David the American");
+            Duck = new Customer(2, 1, "Mallory the duck");
+            Thor = new Customer(3, 2, "Thor, god of thunder");
             counter = 0;
             //Day1 = new Day(7,1);
             //Day2 = new Day(6,2);
@@ -82,7 +82,7 @@ namespace LemonadeStand
                     break;
 
                 case "start":
-
+                    int Purchase = Russian.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold);
                     break;
 
                 default:
