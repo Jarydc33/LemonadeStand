@@ -20,9 +20,9 @@ namespace LemonadeStand
 
         public int[] SevenForecast()
         {
+            System.Random rnd = new System.Random();
             for (int i = 0; i < DaysLeft; i++)
             {
-                System.Random rnd = new System.Random();
                 TempPlace[i] = rnd.Next(69, 90);
             }
             return TempPlace;

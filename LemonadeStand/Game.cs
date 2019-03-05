@@ -89,21 +89,31 @@ namespace LemonadeStand
 
                 case "start":
 
+                    int[] CurrentTemp = new int[1];
                     string[] Purchase;
                     for (int i = 0; i < 2; i++)
                     {
-                        Purchase = Russian.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold);
+                        CurrentTemp = DetermineDay("daily");
+
+                        Purchase = Russian.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                        MyPlayer.UpdateDaily(int.Parse(Purchase[2]));
                         UserInterface.CustomerPurchase(Russian.Name, Purchase);
 
-                        Purchase = American.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold);
+                        Purchase = American.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                        MyPlayer.UpdateDaily(int.Parse(Purchase[2]));
                         UserInterface.CustomerPurchase(American.Name, Purchase);
 
-                        Purchase = Duck.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold);
+                        Purchase = Duck.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                        MyPlayer.UpdateDaily(int.Parse(Purchase[2]));
                         UserInterface.CustomerPurchase(Duck.Name, Purchase);
 
-                        Purchase = Thor.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold);
+                        Purchase = Thor.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                        MyPlayer.UpdateDaily(int.Parse(Purchase[2]));
                         UserInterface.CustomerPurchase(Thor.Name, Purchase);                        
                     }
+                    UserInterface.DailySummary(counter, MyPlayer.DailyProfit, MyPlayer.TotalProfit);
+                    counter++;
+                    MyPlayer.UpdateTotal();
                     GamePlay();
                     break;
 

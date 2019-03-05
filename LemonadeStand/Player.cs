@@ -11,6 +11,8 @@ namespace LemonadeStand
         public double MyMoney;
         public double MyPrice;
         public string MyName;
+        public double DailyProfit;
+        public double TotalProfit;
 
         public Player(string myname)
         {
@@ -19,7 +21,20 @@ namespace LemonadeStand
             MyMoney = 100;
             MyPrice = 0.00;
             MyName = myname;
+            DailyProfit = 0.00;
+            TotalProfit = 0.00;
 
+        }
+
+        public void UpdateDaily(int NewProfit)
+        {
+            DailyProfit += NewProfit;
+        }
+
+        public void UpdateTotal()
+        {
+            TotalProfit += DailyProfit;
+            DailyProfit = 0.00;
         }
     }
        

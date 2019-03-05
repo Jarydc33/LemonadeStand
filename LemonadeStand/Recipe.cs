@@ -12,7 +12,8 @@ namespace LemonadeStand
 
         public Recipe()
         {
-            
+            HowSweet = 1;
+            HowCold = 1;
         }
 
         public void ChangeRecipe(int[]NewRecipe)

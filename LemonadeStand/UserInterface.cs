@@ -16,11 +16,13 @@ namespace LemonadeStand
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Welcome to Lemonade Stand! To start things off, what is your name? \n");
             string name = Console.ReadLine();
+            Console.Clear();
             return name;
         }
 
         public string MainMenu(string Name)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Welcome to the Main Menu " + Name + ", what would you like to do? \n");
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("To view the daily forecast, type daily \n");
@@ -37,11 +39,13 @@ namespace LemonadeStand
 
         public void OutputDaily(int temp)
         {
-            Console.WriteLine("The current temperature is: " + temp + ".");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("The current temperature is: " + temp + ".\n");
         }
 
         public void OutputWeekly(int[]forecast)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("The weather forecast is: ");
             for(int i = 0; i < forecast.Length; i++)
             {
@@ -52,6 +56,7 @@ namespace LemonadeStand
 
         public void ViewInventory(int[] TotalInventory, double TotalMoney)
         {
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write("Your current inventory is: " + TotalInventory[0] + " lemons, ");
             Console.Write(TotalInventory[1] + " pounds of sugar, ");
             Console.Write(TotalInventory[2] + " bottles of vodka ");
@@ -67,6 +72,7 @@ namespace LemonadeStand
 
         public string StorePrices(double[] StorePrices)
         {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write("The current store prices are: $" + StorePrices[0] + " per lemon, $");
             Console.Write(StorePrices[1] + " per pound of sugar, $");
             Console.Write(StorePrices[2] + " per bottle of vodka, $");
@@ -79,13 +85,16 @@ namespace LemonadeStand
 
         public int PurchaseAmount()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("How many would you like to purchase?");
             int AmountPurchased = int.Parse(Console.ReadLine());
+            Console.Clear();
             return AmountPurchased;
         }
 
         public int[] ChangeRecipe()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             int[] Recipe = new int[3];
             Console.WriteLine("The recipe will consist of a combination of lemons, sugar, and ice. The more lemons, the more sour it will be." +
                 "The more sugar, the sweeter and so on.");
@@ -100,15 +109,25 @@ namespace LemonadeStand
         
         public void CustomerPurchase(string name, string[] opinion)
         {
-            Console.WriteLine(name + opinion[0] + opinion[1]);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(name + opinion[0] + opinion[1] + "\n");
         }
 
         public double ChangePrice()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("What would you like to set the price as? (Hint, an average price is about $1.00)");
             double price = double.Parse(Console.ReadLine());
             return price;
 
+        }
+
+        public void DailySummary(int Day, double DailyProfit, double TotalProfit)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("Well done! You have made it to the end of Day " + Day + ".\n " +
+                "Your current daily profit is: $" + DailyProfit +".\n" +
+                "Your current total profit/loss is: $" + TotalProfit +".\n");
         }
     }
 }
