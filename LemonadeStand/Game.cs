@@ -107,12 +107,13 @@ namespace LemonadeStand
                     {
                         CurrentTemp = DetermineDay("daily");
 
+                        
                         Russian.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
                         MyPlayer.UpdateDaily(Russian.HowMany);
                         HasCups = MyPlayer.MyInventory.UpdateInventoryGame(Russian.HowMany);
                         if (!HasCups) { UserInterface.NoMoreCups(); break; }
                         UserInterface.CustomerPurchase(Russian.Name, Russian.CustomerThought);
-
+                                                
                         American.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
                         MyPlayer.UpdateDaily(American.HowMany);
                         HasCups = MyPlayer.MyInventory.UpdateInventoryGame(American.HowMany);

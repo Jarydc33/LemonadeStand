@@ -35,21 +35,25 @@ namespace LemonadeStand
                 case 1:
                     TotalCash -= LemonPrice * AmountPurchased;
                     MyTotalInventory[0] += AmountPurchased;
+                    CashSpent = StartingCash - TotalCash;
                     return TotalCash;
 
                 case 2:
                     TotalCash -= SugarPrice * AmountPurchased;
                     MyTotalInventory[1] += AmountPurchased;
+                    CashSpent = StartingCash - TotalCash;
                     return TotalCash;
                                    
                 case 3:
                     TotalCash -= IcePrice * AmountPurchased;
-                    MyTotalInventory[3] += AmountPurchased;
+                    MyTotalInventory[2] += AmountPurchased;
+                    CashSpent = StartingCash - TotalCash;
                     return TotalCash;
 
                 case 4:
                     TotalCash -= CupPrice * AmountPurchased;
-                    MyTotalInventory[4] += AmountPurchased;
+                    MyTotalInventory[3] += AmountPurchased;
+                    CashSpent = StartingCash - TotalCash;
                     return TotalCash;
 
                 case 5:
@@ -64,9 +68,10 @@ namespace LemonadeStand
 
                     TotalCash -= CupPrice * AmountPurchased;
                     MyTotalInventory[3] += AmountPurchased;
+                    CashSpent = StartingCash - TotalCash;
                     return TotalCash;                    
             }
-            CashSpent = StartingCash - TotalCash;
+            
             return TotalCash;
         }
 

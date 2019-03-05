@@ -35,6 +35,7 @@ namespace LemonadeStand
             if(Temperature[0] > 83)
             {
                 HowMany = 1;
+                Console.WriteLine("Hit above 83");
             }
             if(CurrentPrice > PriceRoof)
             {
@@ -49,11 +50,13 @@ namespace LemonadeStand
                         {
                             CustomerThought = Opinion[2];
                             HowMany += 2;
+                            Console.WriteLine(HowMany);
                         }
                         else
                         {
                             CustomerThought = Opinion[3];
                             HowMany += 0;
+                            Console.WriteLine(HowMany);
                         }
                         break;
 
@@ -62,11 +65,13 @@ namespace LemonadeStand
                         {
                             CustomerThought = Opinion[2];
                             HowMany += 2;
+                            Console.WriteLine(HowMany);
                         }
                         else
                         {
                             CustomerThought = Opinion[3];
                             HowMany += 0;
+                            Console.WriteLine(HowMany);
                         }
                         break;
 
@@ -75,11 +80,13 @@ namespace LemonadeStand
                         {
                             CustomerThought = Opinion[2];
                             HowMany += 2;
+                            Console.WriteLine(HowMany);
                         }
                         else
                         {
                             CustomerThought = Opinion[0];
                             HowMany += 0;
+                            Console.WriteLine(HowMany);
                         }
                         break;
 
@@ -88,11 +95,13 @@ namespace LemonadeStand
                         {
                             CustomerThought = Opinion[2];
                             HowMany += 2;
+                            Console.WriteLine(HowMany);
                         }
                         else
                         {
                             CustomerThought = Opinion[0];
                             HowMany += 0;
+                            Console.WriteLine(HowMany);
                         }
                         break;
                 }
