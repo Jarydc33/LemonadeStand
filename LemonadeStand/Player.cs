@@ -21,19 +21,21 @@ namespace LemonadeStand
             MyInventory = new Inventory();
             MyRecipe = new Recipe();
             MyLemonade = new MakeLemonade();
-            MyMoney = 100;
-            MyPrice = 0.00;
+            MyMoney = 35;
+            MyPrice = 1.00;
             MyName = myname;
             DailyProfit = 0.00;
+            Math.Round(DailyProfit, 2, MidpointRounding.ToEven);
             TotalProfit = 0.00;
+            Math.Round(TotalProfit, 2, MidpointRounding.ToEven);
             HasMade = false;
 
         }
 
         public void UpdateDaily(int NewProfit)
         {
+            NewProfit *= (int)MyPrice;
             DailyProfit += NewProfit;
-            
             
         }
 

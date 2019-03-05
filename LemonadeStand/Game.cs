@@ -28,10 +28,10 @@ namespace LemonadeStand
         {
             UserInterface = new UserInterface();
             GameStore = new Store();
-            Russian = new Customer(4, 3, 1.5, "Igor the Russian");
+            Russian = new Customer(4, 3, 2.0, "Igor the Russian");
             American = new Customer(1, 3, 3.5, "David the American");
             Duck = new Customer(2, 1, 5.65, "Mallory the duck");
-            Thor = new Customer(3, 2, 1.35, "Thor, god of thunder");
+            Thor = new Customer(3, 2, 2.55, "Thor, god of thunder");
             counter = 1;
             Recipe = new int[3] { 1, 1, 1 };
             Day1 = new Day(7,1);
@@ -47,7 +47,9 @@ namespace LemonadeStand
         }
 
         public void GamePlay()
-        {
+        {            
+            UserInterface.ViewInventory(MyPlayer.MyInventory.TotalInventory, MyPlayer.MyMoney);
+            
             string WhatNext =  UserInterface.MainMenu(Name);
 
             switch (WhatNext)
@@ -63,29 +65,26 @@ namespace LemonadeStand
                     UserInterface.OutputWeekly(forecast);
                     GamePlay();
                     break;
-
-                case "inventory":
-                    UserInterface.ViewInventory(MyPlayer.MyInventory.TotalInventory, MyPlayer.MyMoney);
-                    GamePlay();
-                    break;
-
+                                    
                 case "store":
                     string UserInput = UserInterface.StorePrices(GameStore.StorePrices);
                     int AmountPurchased = UserInterface.PurchaseAmount();
                     PurchaseItems(UserInput, AmountPurchased);
-                    UserInterface.ViewInventory(MyPlayer.MyInventory.TotalInventory, MyPlayer.MyMoney);
                     GamePlay();
                     break;
 
                 case "recipe":
+                    UserInterface.ViewRecipe(Recipe);
                     Recipe = UserInterface.ChangeRecipe();
                     MyPlayer.MyRecipe.ChangeRecipe(Recipe);
+                    Console.Clear();
                     GamePlay();
                     break;
 
                 case "price":
                     double price = UserInterface.ChangePrice();
                     MyPlayer.MyPrice = price;
+                    Console.Clear();
                     GamePlay();
                     break;
 
@@ -133,6 +132,7 @@ namespace LemonadeStand
                         UserInterface.CustomerPurchase(Thor.Name, Thor.CustomerThought);                        
                     }
                     MyPlayer.UpdateTotal(GameStore.CashSpent);
+                    if(MyPlayer.TotalProfit > 0) { MyPlayer.MyMoney += MyPlayer.TotalProfit; }
                     UserInterface.DailySummary(counter, MyPlayer.DailyProfit, MyPlayer.TotalProfit);
                     counter++;
                     MyPlayer.ResetDaily();

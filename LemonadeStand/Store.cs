@@ -16,11 +16,11 @@ namespace LemonadeStand
         public Store()
         {
             StorePrices = new double[4];
-            LemonPrice = 1.12;
+            LemonPrice = .35;
             StorePrices[0] = LemonPrice;
-            SugarPrice = 2.25;
+            SugarPrice = 1.59;
             StorePrices[1] = SugarPrice;
-            IcePrice = 1.55;
+            IcePrice = 1.19;
             StorePrices[2] = IcePrice;
             CupPrice = .15;
             StorePrices[3] = CupPrice;
