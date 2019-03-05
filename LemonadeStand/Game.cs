@@ -81,8 +81,30 @@ namespace LemonadeStand
                     GamePlay();
                     break;
 
+                case "price":
+                    double price = UserInterface.ChangePrice();
+                    MyPlayer.MyPrice = price;
+                    GamePlay();
+                    break;
+
                 case "start":
-                    int Purchase = Russian.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold);
+
+                    string[] Purchase;
+                    for (int i = 0; i < 2; i++)
+                    {
+                        Purchase = Russian.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold);
+                        UserInterface.CustomerPurchase(Russian.Name, Purchase);
+
+                        Purchase = American.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold);
+                        UserInterface.CustomerPurchase(American.Name, Purchase);
+
+                        Purchase = Duck.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold);
+                        UserInterface.CustomerPurchase(Duck.Name, Purchase);
+
+                        Purchase = Thor.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold);
+                        UserInterface.CustomerPurchase(Thor.Name, Purchase);                        
+                    }
+                    GamePlay();
                     break;
 
                 default:
@@ -198,6 +220,10 @@ namespace LemonadeStand
 
                 case "cups":
                     MyPlayer.MyMoney = GameStore.Cashier(5, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    break;
+
+                case "all":
+                    MyPlayer.MyMoney = GameStore.Cashier(6, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
                     break;
             }
         }

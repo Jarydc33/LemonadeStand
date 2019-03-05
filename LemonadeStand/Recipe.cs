@@ -34,15 +34,15 @@ namespace LemonadeStand
                 HowSweet = 3;
             }
 
-            if (NewRecipe[3] == 0)
+            if (NewRecipe[2] == 0)
             {
                 HowCold = 1;
             }
-            else if (NewRecipe[3] == 1)
+            else if (NewRecipe[2] == 1)
             {
                 HowCold = 2;
             }
-            else if(NewRecipe[3] > 1)
+            else if(NewRecipe[2] > 1)
             {
                 HowCold = 3;
             }

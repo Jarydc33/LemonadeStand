@@ -33,29 +33,46 @@ namespace LemonadeStand
             switch (WhichItem)
             {
                 case 1:
-                    TotalCash -= LemonPrice;
+                    TotalCash -= LemonPrice * AmountPurchased;
                     MyTotalInventory[0] += AmountPurchased;
                     return TotalCash;
 
                 case 2:
-                    TotalCash -= SugarPrice;
+                    TotalCash -= SugarPrice * AmountPurchased;
                     MyTotalInventory[1] += AmountPurchased;
                     return TotalCash;
 
                 case 3:
-                    TotalCash -= VodkaPrice;
+                    TotalCash -= VodkaPrice * AmountPurchased;
                     MyTotalInventory[2] += AmountPurchased;
                     return TotalCash;
 
                 case 4:
-                    TotalCash -= IcePrice;
+                    TotalCash -= IcePrice * AmountPurchased;
                     MyTotalInventory[3] += AmountPurchased;
                     return TotalCash;
 
                 case 5:
-                    TotalCash -= CupPrice;
+                    TotalCash -= CupPrice * AmountPurchased;
                     MyTotalInventory[4] += AmountPurchased;
                     return TotalCash;
+
+                case 6:
+                    TotalCash -= LemonPrice * AmountPurchased;
+                    MyTotalInventory[0] += AmountPurchased;
+
+                    TotalCash -= SugarPrice * AmountPurchased;
+                    MyTotalInventory[1] += AmountPurchased;
+
+                    TotalCash -= VodkaPrice * AmountPurchased;
+                    MyTotalInventory[2] += AmountPurchased;
+
+                    TotalCash -= IcePrice * AmountPurchased;
+                    MyTotalInventory[3] += AmountPurchased;
+
+                    TotalCash -= CupPrice * AmountPurchased;
+                    MyTotalInventory[4] += AmountPurchased;
+                    return TotalCash;                    
             }
             return TotalCash;
         }

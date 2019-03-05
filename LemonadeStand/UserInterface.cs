@@ -29,7 +29,9 @@ namespace LemonadeStand
             Console.WriteLine("To visit the store, type store \n");
             Console.WriteLine("To start the next day, type start \n");
             Console.WriteLine("To change your current recipe, type recipe \n");
+            Console.WriteLine("To change the price of the lemonade, type price \n");
             string WhatNext = Console.ReadLine();
+            Console.Clear();
             return WhatNext;
         }
 
@@ -70,7 +72,7 @@ namespace LemonadeStand
             Console.Write(StorePrices[2] + " per bottle of vodka, $");
             Console.Write(StorePrices[3] + " per bag of ice, and $");
             Console.WriteLine(StorePrices[4] + " per cup. \n");
-            Console.WriteLine("What would you like to purchase? Lemons, sugar, vodka, ice, or cups?");
+            Console.WriteLine("What would you like to purchase? Lemons, sugar, vodka, ice, cups, or all?");
             string UserInput = Console.ReadLine();
             return UserInput;
         }
@@ -96,9 +98,17 @@ namespace LemonadeStand
             return Recipe;
         }
         
-        public void CustomerPurchase()
+        public void CustomerPurchase(string name, string[] opinion)
         {
-            Console.WriteLine("");
+            Console.WriteLine(name + opinion[0] + opinion[1]);
+        }
+
+        public double ChangePrice()
+        {
+            Console.WriteLine("What would you like to set the price as? (Hint, an average price is about $1.00)");
+            double price = double.Parse(Console.ReadLine());
+            return price;
+
         }
     }
 }
