@@ -9,27 +9,27 @@ namespace LemonadeStand
         public double LemonPrice;
         public double CupPrice;
         public double SugarPrice;
-        public double VodkaPrice;
         public double IcePrice;
         public double[] StorePrices;
+        public double CashSpent;
 
         public Store()
         {
-            StorePrices = new double[5];
+            StorePrices = new double[4];
             LemonPrice = 1.12;
             StorePrices[0] = LemonPrice;
             SugarPrice = 2.25;
             StorePrices[1] = SugarPrice;
-            VodkaPrice = 15.00;
-            StorePrices[2] = VodkaPrice;
             IcePrice = 1.55;
-            StorePrices[3] = IcePrice;
+            StorePrices[2] = IcePrice;
             CupPrice = .15;
-            StorePrices[4] = CupPrice;
+            StorePrices[3] = CupPrice;
+            CashSpent = 0;
         }
 
         public double Cashier(int WhichItem, double TotalCash, int[]MyTotalInventory, int AmountPurchased)
         {
+            double StartingCash = TotalCash;
             switch (WhichItem)
             {
                 case 1:
@@ -41,39 +41,32 @@ namespace LemonadeStand
                     TotalCash -= SugarPrice * AmountPurchased;
                     MyTotalInventory[1] += AmountPurchased;
                     return TotalCash;
-
+                                   
                 case 3:
-                    TotalCash -= VodkaPrice * AmountPurchased;
-                    MyTotalInventory[2] += AmountPurchased;
-                    return TotalCash;
-
-                case 4:
                     TotalCash -= IcePrice * AmountPurchased;
                     MyTotalInventory[3] += AmountPurchased;
                     return TotalCash;
 
-                case 5:
+                case 4:
                     TotalCash -= CupPrice * AmountPurchased;
                     MyTotalInventory[4] += AmountPurchased;
                     return TotalCash;
 
-                case 6:
+                case 5:
                     TotalCash -= LemonPrice * AmountPurchased;
                     MyTotalInventory[0] += AmountPurchased;
 
                     TotalCash -= SugarPrice * AmountPurchased;
                     MyTotalInventory[1] += AmountPurchased;
 
-                    TotalCash -= VodkaPrice * AmountPurchased;
+                    TotalCash -= IcePrice * AmountPurchased;
                     MyTotalInventory[2] += AmountPurchased;
 
-                    TotalCash -= IcePrice * AmountPurchased;
-                    MyTotalInventory[3] += AmountPurchased;
-
                     TotalCash -= CupPrice * AmountPurchased;
-                    MyTotalInventory[4] += AmountPurchased;
+                    MyTotalInventory[3] += AmountPurchased;
                     return TotalCash;                    
             }
+            CashSpent = StartingCash - TotalCash;
             return TotalCash;
         }
 

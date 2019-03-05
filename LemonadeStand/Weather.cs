@@ -30,9 +30,7 @@ namespace LemonadeStand
 
         public int DailyWeather()
         {
-            System.Random rnd2 = new System.Random();
-            DailyTemp = rnd2.Next(TempPlace[CurrentDay], TempPlace[CurrentDay]);
-            DailyTemp = rnd2.Next(DailyTemp - 3, DailyTemp + 5);
+            DailyTemp = TempPlace[0];
             return DailyTemp;
            
         }

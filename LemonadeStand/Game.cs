@@ -22,23 +22,25 @@ namespace LemonadeStand
         public Day Day5;
         public Day Day6;
         public Day Day7;
+        int[] Recipe;
 
         public Game()
         {
             UserInterface = new UserInterface();
             GameStore = new Store();
-            Russian = new Customer(4, 3, "Igor the Russian");
-            American = new Customer(1, 3, "David the American");
-            Duck = new Customer(2, 1, "Mallory the duck");
-            Thor = new Customer(3, 2, "Thor, god of thunder");
-            counter = 0;
-            //Day1 = new Day(7,1);
-            //Day2 = new Day(6,2);
-            //Day3 = new Day(5,3);
-            //Day4 = new Day(4,4);
-            //Day5 = new Day(3,5);
-            //Day6 = new Day(2,6);
-            //Day7 = new Day(1,7);
+            Russian = new Customer(4, 3, 1.5, "Igor the Russian");
+            American = new Customer(1, 3, 3.5, "David the American");
+            Duck = new Customer(2, 1, 5.65, "Mallory the duck");
+            Thor = new Customer(3, 2, 1.35, "Thor, god of thunder");
+            counter = 1;
+            Recipe = new int[3] { 1, 1, 1 };
+            Day1 = new Day(7,1);
+            Day2 = new Day(6,2);
+            Day3 = new Day(5,3);
+            Day4 = new Day(4,4);
+            Day5 = new Day(3,5);
+            Day6 = new Day(2,6);
+            Day7 = new Day(1,7);
             Name = UserInterface.Welcome();
             MyPlayer = new Player(Name);
             GamePlay();
@@ -76,7 +78,7 @@ namespace LemonadeStand
                     break;
 
                 case "recipe":
-                    int[]Recipe = UserInterface.ChangeRecipe();
+                    Recipe = UserInterface.ChangeRecipe();
                     MyPlayer.MyRecipe.ChangeRecipe(Recipe);
                     GamePlay();
                     break;
@@ -87,33 +89,52 @@ namespace LemonadeStand
                     GamePlay();
                     break;
 
+                case "make":
+                    if (MyPlayer.HasMade) { UserInterface.MakingYourLemonade(); GamePlay(); }
+                    int InvTest = MyPlayer.MyInventory.UpdateInventoryRecipe(Recipe);
+                    if (InvTest == 1) { UserInterface.TooMuchChange(InvTest); GamePlay(); }
+                    MyPlayer.MakeLemonade();
+                    UserInterface.MakingYourLemonade();
+                    GamePlay();
+                    break;
+
                 case "start":
 
+                    if (!MyPlayer.HasMade) { UserInterface.MakeYourNade(); GamePlay(); }
                     int[] CurrentTemp = new int[1];
-                    string[] Purchase;
+                    bool HasCups = true;
                     for (int i = 0; i < 2; i++)
                     {
                         CurrentTemp = DetermineDay("daily");
 
-                        Purchase = Russian.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                        MyPlayer.UpdateDaily(int.Parse(Purchase[2]));
-                        UserInterface.CustomerPurchase(Russian.Name, Purchase);
+                        Russian.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                        MyPlayer.UpdateDaily(Russian.HowMany);
+                        HasCups = MyPlayer.MyInventory.UpdateInventoryGame(Russian.HowMany);
+                        if (!HasCups) { UserInterface.NoMoreCups(); break; }
+                        UserInterface.CustomerPurchase(Russian.Name, Russian.CustomerThought);
 
-                        Purchase = American.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                        MyPlayer.UpdateDaily(int.Parse(Purchase[2]));
-                        UserInterface.CustomerPurchase(American.Name, Purchase);
+                        American.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                        MyPlayer.UpdateDaily(American.HowMany);
+                        HasCups = MyPlayer.MyInventory.UpdateInventoryGame(American.HowMany);
+                        if (!HasCups) { UserInterface.NoMoreCups(); break; }
+                        UserInterface.CustomerPurchase(American.Name, American.CustomerThought);
 
-                        Purchase = Duck.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                        MyPlayer.UpdateDaily(int.Parse(Purchase[2]));
-                        UserInterface.CustomerPurchase(Duck.Name, Purchase);
+                        Duck.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                        MyPlayer.UpdateDaily(Duck.HowMany);
+                        HasCups = MyPlayer.MyInventory.UpdateInventoryGame(Duck.HowMany);
+                        if (!HasCups) { UserInterface.NoMoreCups(); break; }
+                        UserInterface.CustomerPurchase(Duck.Name, Duck.CustomerThought);
 
-                        Purchase = Thor.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                        MyPlayer.UpdateDaily(int.Parse(Purchase[2]));
-                        UserInterface.CustomerPurchase(Thor.Name, Purchase);                        
+                        Thor.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                        MyPlayer.UpdateDaily(Thor.HowMany);
+                        HasCups = MyPlayer.MyInventory.UpdateInventoryGame(Thor.HowMany);
+                        if (!HasCups) { UserInterface.NoMoreCups(); break; }
+                        UserInterface.CustomerPurchase(Thor.Name, Thor.CustomerThought);                        
                     }
+                    MyPlayer.UpdateTotal(GameStore.CashSpent);
                     UserInterface.DailySummary(counter, MyPlayer.DailyProfit, MyPlayer.TotalProfit);
                     counter++;
-                    MyPlayer.UpdateTotal();
+                    MyPlayer.ResetDaily();
                     GamePlay();
                     break;
 
@@ -128,21 +149,21 @@ namespace LemonadeStand
         {
             switch (counter)
             {
-                case 0:
+                case 1:
                     //need to increase counter once day two starts
                     if(which == "daily")
                     {
-                        Day1 = new Day(7, 1);
+                        //Day1 = new Day(7, 1);
                         return Day1.temp;
                     }
                     else
                     {
                         return Day1.SevenDay;
                     }
-                case 1:
+                case 2:
                     if (which == "daily")
                     {
-                        Day2 = new Day(6, 2);
+                        //Day2 = new Day(6, 2);
                         return Day2.temp;
                     }
                     else
@@ -150,10 +171,10 @@ namespace LemonadeStand
                         return Day2.SevenDay;
                     }
 
-                case 2:
+                case 3:
                     if (which == "daily")
                     {
-                        Day3 = new Day(5, 3);
+                        //Day3 = new Day(5, 3);
                         return Day3.temp;
                     }
                     else
@@ -161,10 +182,10 @@ namespace LemonadeStand
                         return Day3.SevenDay;
                     }
 
-                case 3:
+                case 4:
                     if (which == "daily")
                     {
-                        Day4 = new Day(4, 4);
+                        //Day4 = new Day(4, 4);
                         return Day4.temp;
                     }
                     else
@@ -172,10 +193,10 @@ namespace LemonadeStand
                         return Day4.SevenDay;
                     }
 
-                case 4:
+                case 5:
                     if (which == "daily")
                     {
-                        Day5 = new Day(3, 5);
+                       // Day5 = new Day(3, 5);
                         return Day5.temp;
                     }
                     else
@@ -183,10 +204,10 @@ namespace LemonadeStand
                         return Day5.SevenDay;
                     }
 
-                case 5:
+                case 6:
                     if (which == "daily")
                     {
-                        Day6 = new Day(2, 6);
+                        //Day6 = new Day(2, 6);
                         return Day6.temp;
                     }
                     else
@@ -194,10 +215,10 @@ namespace LemonadeStand
                         return Day6.SevenDay;
                     }
 
-                case 6:
+                case 7:
                     if (which == "daily")
                     {
-                        Day7 = new Day(1, 7);
+                        //Day7 = new Day(1, 7);
                         return Day7.temp;
                     }
                     else
@@ -220,20 +241,16 @@ namespace LemonadeStand
                     MyPlayer.MyMoney = GameStore.Cashier(2, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
                     break;
 
-                case "vodka":
+                case "ice":
                     MyPlayer.MyMoney = GameStore.Cashier(3, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
                     break;
 
-                case "ice":
+                case "cups":
                     MyPlayer.MyMoney = GameStore.Cashier(4, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
                     break;
 
-                case "cups":
-                    MyPlayer.MyMoney = GameStore.Cashier(5, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
-                    break;
-
                 case "all":
-                    MyPlayer.MyMoney = GameStore.Cashier(6, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    MyPlayer.MyMoney = GameStore.Cashier(5, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
                     break;
             }
         }
