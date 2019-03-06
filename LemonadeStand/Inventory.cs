@@ -6,55 +6,55 @@ namespace LemonadeStand
 {
     public class Inventory
     {
-        public int Bananas;
-        public int Bugs;
-        public int Ice;
-        public int Cups;
-        public int[] TotalInventory;
+        public int bananas;
+        public int bugs;
+        public int ice;
+        public int cups;
+        public int[] totalInventory;
 
         public Inventory()
         {
-            TotalInventory = new int[4];
-            Bananas = 5;
-            TotalInventory[0] = Bananas;
-            Bugs = 3;
-            TotalInventory[1] = Bugs;
-            Ice = 3;
-            TotalInventory[2] = Ice;
-            Cups = 35;
-            TotalInventory[3] = Cups;
+            totalInventory = new int[4];
+            bananas = 5;
+            totalInventory[0] = bananas;
+            bugs = 3;
+            totalInventory[1] = bugs;
+            ice = 3;
+            totalInventory[2] = ice;
+            cups = 35;
+            totalInventory[3] = cups;
         }
 
-        public int UpdateInventoryRecipe(int[]Changes)
+        public int UpdateInventoryRecipe(int[]changes)
         {
-            if(TotalInventory[0] < Changes[0])
+            if(totalInventory[0] < changes[0])
             {
                 return 1;
             }
-            else if(TotalInventory[1] < Changes[1])
+            else if(totalInventory[1] < changes[1])
             {
                 return 1;
             }
-            else if(TotalInventory[2] < Changes[2])
+            else if(totalInventory[2] < changes[2])
             {
                 return 1;
             }
             else
             {
-                TotalInventory[0] -= Changes[0];
-                TotalInventory[1] -= Changes[1];
-                TotalInventory[2] -= Changes[2];
+                totalInventory[0] -= changes[0];
+                totalInventory[1] -= changes[1];
+                totalInventory[2] -= changes[2];
                 return 0;
             }
             
         }
-        public bool UpdateInventoryGame(int CupChange)
+        public bool UpdateInventoryGame(int cupChange)
         {            
-            if(TotalInventory[3] < CupChange)
+            if(totalInventory[3] < cupChange)
             {
                 return false;
             }
-            TotalInventory[3] -= CupChange;
+            totalInventory[3] -= cupChange;
             return true;
         }
         

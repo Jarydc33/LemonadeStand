@@ -9,7 +9,7 @@ namespace LemonadeStand
         public int Preference;
         public string[] Opinion;
         public string Name;
-        public int HowMany;
+        public int howMany;
         public string CustomerThought;
         public int PriceRoof;
 
@@ -28,23 +28,25 @@ namespace LemonadeStand
 
         public void Purchase(int HowSweet, int HowCold, double CurrentPrice, int Temperature)
         {
-            HowMany = 0;
+            howMany = 0;
             if(Temperature > 85)
             {
-                HowMany = 1;
+                howMany = 1;
             }
             else if(Temperature > 100)
             {
-                HowMany = 2;
+                howMany = 2;
             }
 
             if(HowCold == 0)
             {
                 CustomerThought = Opinion[4];
+                howMany = 0;
             }
             else if(CurrentPrice > PriceRoof)
             {
                 CustomerThought = Opinion[1];
+                howMany = 0;
             }
             else
             {
@@ -54,12 +56,12 @@ namespace LemonadeStand
                         if (Preference == 1 || Preference == 2)
                         {
                             CustomerThought = Opinion[2];
-                            HowMany += 2;
+                            howMany += 2;
                         }
                         else
                         {
                             CustomerThought = Opinion[3];
-                            HowMany += 0;
+                            howMany += 0;
                         }
                         break;
 
@@ -67,12 +69,12 @@ namespace LemonadeStand
                         if (Preference == 1 || Preference == 2)
                         {
                             CustomerThought = Opinion[2];
-                            HowMany += 2;
+                            howMany += 2;
                         }
                         else
                         {
                             CustomerThought = Opinion[3];
-                            HowMany += 0;
+                            howMany += 0;
                         }
                         break;
 
@@ -80,12 +82,12 @@ namespace LemonadeStand
                         if (Preference == 3 || Preference == 4)
                         {
                             CustomerThought = Opinion[2];
-                            HowMany += 2;
+                            howMany += 2;
                         }
                         else
                         {
                             CustomerThought = Opinion[0];
-                            HowMany += 0;
+                            howMany += 0;
                         }
                         break;
 
@@ -93,12 +95,12 @@ namespace LemonadeStand
                         if (Preference == 3 || Preference == 4)
                         {
                             CustomerThought = Opinion[2];
-                            HowMany += 2;
+                            howMany += 2;
                         }
                         else
                         {
                             CustomerThought = Opinion[0];
-                            HowMany += 0;
+                            howMany += 0;
                         }
                         break;
                 }

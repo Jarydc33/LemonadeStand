@@ -8,37 +8,34 @@ namespace LemonadeStand
     {
         public Inventory MyInventory;
         public Recipe MyRecipe;
-        public double MyMoney;
-        public double MyPrice;
+        public int myMoney;
+        public int myPrice;
         public string MyName;
-        public double DailyProfit;
-        public double TotalProfit;
-        public bool HasMade;
+        public int DailyProfit;
+        public int TotalProfit;
+        public bool hasMade;
 
         public Player(string myname)
         {
             MyInventory = new Inventory();
             MyRecipe = new Recipe();
-            MyMoney = 65;
-            Math.Round(MyMoney, 2, MidpointRounding.AwayFromZero);
-            MyPrice = 6;
+            myMoney = 65;
+            myPrice = 6;
             MyName = myname;
-            DailyProfit = 0.00;
-            Math.Round(DailyProfit, 1, MidpointRounding.AwayFromZero);
-            TotalProfit = 0.00;
-            Math.Round(TotalProfit, 1, MidpointRounding.AwayFromZero);
-            HasMade = false;
+            DailyProfit = 0;
+            TotalProfit = 0;
+            hasMade = false;
 
         }
 
         public void UpdateDaily(int NewProfit)
         {
-            NewProfit *= (int)MyPrice;
+            NewProfit *= myPrice;
             DailyProfit += NewProfit;
             
         }
 
-        public void UpdateTotal(double CashSpent)
+        public void UpdateTotal(int CashSpent)
         {
             DailyProfit -= CashSpent;
             TotalProfit += DailyProfit;
@@ -48,13 +45,13 @@ namespace LemonadeStand
 
         public void ResetDaily()
         {
-            DailyProfit = 0.00;            
-            HasMade = false;
+            DailyProfit = 0;            
+            hasMade = false;
         }
 
         public void MakeLemonade()
         {
-            HasMade = true;
+            hasMade = true;
         }
     }
        

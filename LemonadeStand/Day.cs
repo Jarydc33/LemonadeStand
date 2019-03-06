@@ -8,12 +8,12 @@ namespace LemonadeStand
     {        
         public Weather Forecast;
         public int temp;
-        public int[] SevenDay;
+        public int[] sevenDay;
 
-        public Day(int DaysLeft, int CurrentDay)
+        public Day(int daysLeft, int currentDay)
         {
-            Forecast = new Weather(DaysLeft, CurrentDay);
-            SevenDay = new int[DaysLeft-1];
+            Forecast = new Weather(daysLeft, currentDay);
+            sevenDay = new int[daysLeft-1];
             SevenDayForecast();
             GetDaily();
         }
@@ -26,7 +26,7 @@ namespace LemonadeStand
 
         public void SevenDayForecast()
         {
-            SevenDay = Forecast.SevenForecast();
+            sevenDay = Forecast.SevenForecast();
         }
 
     }

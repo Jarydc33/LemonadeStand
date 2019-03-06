@@ -75,7 +75,7 @@ namespace LemonadeStand
             Console.WriteLine("Error. Please input again.\n");
         }
 
-        public string StorePrices(double[] StorePrices)
+        public string StorePrices(int[] StorePrices)
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write("The current store prices are: " + StorePrices[0] + " grubs per banana, ");

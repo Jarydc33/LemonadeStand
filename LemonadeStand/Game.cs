@@ -14,13 +14,6 @@ namespace LemonadeStand
         public string name;
         public string whatNext;
         public int counter;
-        public Day day1;
-        public Day day2;
-        public Day day3;
-        public Day day4;
-        public Day day5;
-        public Day day6;
-        public Day day7;
         Random gen = new Random();
         int[] recipe;
 
@@ -31,14 +24,7 @@ namespace LemonadeStand
             customerList = new List<Customer>();
             dayList = new List<Day>();
             counter = 0;
-            recipe = new int[3] { 1, 1, 1 };
-            day1 = new Day(7,1);
-            day2 = new Day(6,2);
-            day3 = new Day(5,3);
-            day4 = new Day(4,4);
-            day5 = new Day(3,5);
-            day6 = new Day(2,6);
-            day7 = new Day(1,7);
+            recipe = new int[3] { 1, 1, 1 };            
             name = UserInterface.Welcome();
             MyPlayer = new Player(name);
             CreateDays();
@@ -47,27 +33,24 @@ namespace LemonadeStand
 
         public void GamePlay()
         {            
-            UserInterface.ViewInventory(MyPlayer.MyInventory.TotalInventory, MyPlayer.MyMoney);
+            UserInterface.ViewInventory(MyPlayer.MyInventory.totalInventory, MyPlayer.myMoney);
             CheckContinuingGameplay();
             whatNext = UserInterface.MainMenu(name);
 
             switch (whatNext)
             {
                 case "daily":
-                    //int[] temp = DetermineDay("daily");
-
                     UserInterface.OutputDaily(dayList[counter].temp);
                     GamePlay();
                     break;
 
                 case "weekly":
-                    //int[] forecast = DetermineDay("weekly");
-                    UserInterface.OutputWeekly(dayList[counter].SevenDay);
+                    UserInterface.OutputWeekly(dayList[counter].sevenDay);
                     GamePlay();
                     break;
                                     
                 case "store":
-                    string UserInput = UserInterface.StorePrices(GameStore.StorePrices);
+                    string UserInput = UserInterface.StorePrices(GameStore.storePrices);
                     string AmountPurchased = UserInterface.PurchaseAmount();
                     int PurchaseParsed = AttemptParseInt(AmountPurchased);
                     PurchaseItems(UserInput.ToLower(), PurchaseParsed);
@@ -76,10 +59,10 @@ namespace LemonadeStand
 
                 case "recipe":
                     UserInterface.ViewRecipe(recipe);
-                    string[] PotentialRecipe = UserInterface.ChangeRecipe();
-                    recipe[0] = AttemptParseInt(PotentialRecipe[0]);
-                    recipe[1] = AttemptParseInt(PotentialRecipe[1]);
-                    recipe[2] = AttemptParseInt(PotentialRecipe[2]);
+                    string[] potentialRecipe = UserInterface.ChangeRecipe();
+                    recipe[0] = AttemptParseInt(potentialRecipe[0]);
+                    recipe[1] = AttemptParseInt(potentialRecipe[1]);
+                    recipe[2] = AttemptParseInt(potentialRecipe[2]);
                     MyPlayer.MyRecipe.ChangeRecipe(recipe);
                     Console.Clear();
                     GamePlay();
@@ -87,16 +70,16 @@ namespace LemonadeStand
 
                 case "price":
                     string potentialprice = UserInterface.ChangePrice();
-                    double NewPrice = AttemptParseDouble(potentialprice);
-                    MyPlayer.MyPrice = NewPrice;
+                    int newPrice = AttemptParseInt(potentialprice);
+                    MyPlayer.myPrice = newPrice;
                     Console.Clear();
                     GamePlay();
                     break;
 
                 case "make":
-                    if (MyPlayer.HasMade) { UserInterface.MakingYourLemonade(); GamePlay(); }
-                    int InvTest = MyPlayer.MyInventory.UpdateInventoryRecipe(recipe);
-                    if (InvTest == 1) { UserInterface.TooMuchChange(InvTest); GamePlay(); }
+                    if (MyPlayer.hasMade) { UserInterface.MakingYourLemonade(); GamePlay(); }
+                    int invTest = MyPlayer.MyInventory.UpdateInventoryRecipe(recipe);
+                    if (invTest == 1) { UserInterface.TooMuchChange(invTest); GamePlay(); }
                     MyPlayer.MakeLemonade();
                     UserInterface.MakingYourLemonade();
                     GamePlay();
@@ -104,7 +87,7 @@ namespace LemonadeStand
 
                 case "start":
 
-                    if (!MyPlayer.HasMade) { UserInterface.MakeYourNade(); GamePlay(); }
+                    if (!MyPlayer.hasMade) { UserInterface.MakeYourNade(); GamePlay(); }
                     int CurrentTemp;
                     
                     CurrentTemp = dayList[counter].temp;
@@ -112,9 +95,9 @@ namespace LemonadeStand
 
                     foreach(Customer monkey in customerList)
                     {
-                        monkey.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                        CupChecker(monkey.HowMany);
-                        MyPlayer.UpdateDaily(monkey.HowMany);
+                        monkey.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.myPrice, CurrentTemp);
+                        CupChecker(monkey.howMany);
+                        MyPlayer.UpdateDaily(monkey.howMany);
                         UserInterface.CustomerPurchase(monkey.Name, monkey.CustomerThought);
                     }
                    
@@ -127,8 +110,7 @@ namespace LemonadeStand
                     break;
             }
         }
-
-       
+               
         public void CreateDays()
         {
             for(int i = 7; i > 0; i--)
@@ -176,30 +158,30 @@ namespace LemonadeStand
             return names[randomNumber];
         }
 
-        public void PurchaseItems(string UserInput, int TotalPurchased) {
+        public void PurchaseItems(string userInput, int totalPurchased) {
                         
-            double StartingCash = MyPlayer.MyMoney;
+            int startingCash = MyPlayer.myMoney;
 
-            switch (UserInput)
+            switch (userInput)
             {
                 case "bananas":
-                    MyPlayer.MyMoney = GameStore.Cashier(1, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    MyPlayer.myMoney = GameStore.Cashier(1, MyPlayer.myMoney, MyPlayer.MyInventory.totalInventory, totalPurchased);
                     break;
 
                 case "bugs":
-                    MyPlayer.MyMoney = GameStore.Cashier(2, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    MyPlayer.myMoney = GameStore.Cashier(2, MyPlayer.myMoney, MyPlayer.MyInventory.totalInventory, totalPurchased);
                     break;
 
                 case "ice":
-                    MyPlayer.MyMoney = GameStore.Cashier(3, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    MyPlayer.myMoney = GameStore.Cashier(3, MyPlayer.myMoney, MyPlayer.MyInventory.totalInventory, totalPurchased);
                     break;
 
                 case "cups":
-                    MyPlayer.MyMoney = GameStore.Cashier(4, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    MyPlayer.myMoney = GameStore.Cashier(4, MyPlayer.myMoney, MyPlayer.MyInventory.totalInventory, totalPurchased);
                     break;
 
                 case "all":
-                    MyPlayer.MyMoney = GameStore.Cashier(5, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
+                    MyPlayer.myMoney = GameStore.Cashier(5, MyPlayer.myMoney, MyPlayer.MyInventory.totalInventory, totalPurchased);
                     break;
 
                 default:
@@ -208,7 +190,7 @@ namespace LemonadeStand
                     break;
             }
 
-            if(MyPlayer.MyMoney == StartingCash)
+            if(MyPlayer.myMoney == startingCash)
             {
                 UserInterface.SpentTooMuch();                
                 GamePlay();
@@ -224,13 +206,13 @@ namespace LemonadeStand
             counter++;
             if(counter > 6)
             {
-                string BeginAgain = UserInterface.EndGame();
-                if(BeginAgain == "yes")
+                string beginAgain = UserInterface.EndGame();
+                if(beginAgain == "yes")
                 {
                     Console.Clear();
                     Game NewGame = new Game();
                 }
-                else if(BeginAgain == "no")
+                else if(beginAgain == "no")
                 {
                     Environment.Exit(0);
                 }
@@ -276,11 +258,11 @@ namespace LemonadeStand
 
         public void CheckContinuingGameplay()
         {
-            if(MyPlayer.MyMoney == 0)
+            if(MyPlayer.myMoney == 0)
             {
-                for(int i = 0; i < MyPlayer.MyInventory.TotalInventory.Length; i++)
+                for(int i = 0; i < MyPlayer.MyInventory.totalInventory.Length; i++)
                 {
-                    if(MyPlayer.MyInventory.TotalInventory[i] == 0)
+                    if(MyPlayer.MyInventory.totalInventory[i] == 0)
                     {
                         UserInterface.NoMoreStuff();
                         counter = 8;
@@ -289,7 +271,7 @@ namespace LemonadeStand
                 }
             }
         }
-        //Specifically moved this from the Start case to it`s own method in an attempt to keep to the S of SOLID.
+        
         public void CupChecker(int HowMany)
         {
             bool HasCups = true;
@@ -297,12 +279,12 @@ namespace LemonadeStand
             HasCups = MyPlayer.MyInventory.UpdateInventoryGame(HowMany);
             if (!HasCups) { UserInterface.NoMoreCups(); UpdateEndOfDay(); }
         }
-        //Here as well, I moved this code to have it`s own method since it has the specific job of updating other methods
+        
         public void UpdateEndOfDay()
         {
             MyPlayer.UpdateTotal(GameStore.CashSpent);
-            if (MyPlayer.TotalProfit > 0) { MyPlayer.MyMoney += MyPlayer.DailyProfit; }
-            UserInterface.DailySummary(counter, MyPlayer.DailyProfit, MyPlayer.TotalProfit);
+            if (MyPlayer.TotalProfit > 0) { MyPlayer.myMoney += MyPlayer.DailyProfit; }
+            UserInterface.DailySummary(counter+1, MyPlayer.DailyProfit, MyPlayer.TotalProfit);
             CounterChecker();
             MyPlayer.ResetDaily();
             GameStore.CashSpentReset();
