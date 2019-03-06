@@ -3,21 +3,21 @@
   <Class Name="LemonadeStand.UserInterface" Collapsed="true">
     <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAgAAIBCAAABAgAAAAAAAQQBAAAAAAAAAAKAAAQEA=</HashCode>
+      <HashCode>iAAAgAAIBCAAABAgAAAAAAAQQBAAAAEAAAAAKAgQYUA=</HashCode>
       <FileName>UserInterface.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Store" Collapsed="true">
     <Position X="7" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAQAAAAAIAQAAABAAAAAQAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>gAAAARAAAAAIAQAAABAAAAAQAAAAAAAAAACAAAAAAAA=</HashCode>
       <FileName>Store.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Weather" Collapsed="true">
     <Position X="1.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAQAAAAAAAAAAAAAAAAAACAAQAAAQAABAA=</HashCode>
+      <HashCode>AAAEIAAAAAAQAAAAAAAAAAAAAAAAAACAAQAAAQAABAA=</HashCode>
       <FileName>Weather.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,14 +38,14 @@
   <Class Name="LemonadeStand.Inventory" Collapsed="true">
     <Position X="7.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAWAA=</HashCode>
+      <HashCode>AAAACAAEABAAAAACAAAAAAAAAAAAAAAAAAAAAgAASAA=</HashCode>
       <FileName>Inventory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Player" Collapsed="true">
     <Position X="6.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABAAAAAAABAABAgABAABAAAEAAKAAAQAAQAAA=</HashCode>
+      <HashCode>AAAAAAABAEAAAAABAABAgABAABAAAAAAKAAAQAAQAQA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -59,15 +59,8 @@
   <Class Name="LemonadeStand.Game">
     <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAABAAMLQAAAAABAAANQPAAAAAAEEAAAAAAAAAAA=</HashCode>
+      <HashCode>GAEAAARAAIJADAEAADCAAPQPAIAAEAEkAAAAAAAkAgA=</HashCode>
       <FileName>Game.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="LemonadeStand.MakeLemonade" Collapsed="true">
-    <Position X="6.5" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>MakeLemonade.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -20,6 +20,7 @@ namespace LemonadeStand
         public Customer Gorilla;
         public Customer Chimpanzee;
         public string Name;
+        public string WhatNext;
         public int counter;
         public Day Day1;
         public Day Day2;
@@ -34,16 +35,16 @@ namespace LemonadeStand
         {
             UserInterface = new UserInterface();
             GameStore = new Store();
-            Proboscis = new Customer(4, 3, 2.0, "The Proboscis monkey");
-            Mandrill = new Customer(1, 3, 3.5, "The Mandrill");
-            Macaque = new Customer(2, 1, 5.65, "The Macaque");
-            Howler = new Customer(3, 2, 2.55, "The Howler monkey");
-            Baboon = new Customer(3, 2, 2.55, "The Baboon");
-            Orangutan = new Customer(2, 2, 2.55, "The Orangutan");
-            Bonobo = new Customer(1, 2, 2.55, "The Bonobo");
-            Gibbon = new Customer(2, 2, 2.55, "The Gibbon");
-            Gorilla = new Customer(4, 2, 2.55, "The Gorilla");
-            Chimpanzee = new Customer(1, 2, 2.55, "The Chimp");
+            Proboscis = new Customer(4, 10, "The Proboscis monkey");
+            Mandrill = new Customer(1, 13, "The Mandrill");
+            Macaque = new Customer(2, 7, "The Macaque");
+            Howler = new Customer(3, 15, "The Howler monkey");
+            Baboon = new Customer(3, 9, "The Baboon");
+            Orangutan = new Customer(2, 9, "The Orangutan");
+            Bonobo = new Customer(1, 11, "The Bonobo");
+            Gibbon = new Customer(2, 10, "The Gibbon");
+            Gorilla = new Customer(4, 13, "The Gorilla");
+            Chimpanzee = new Customer(1, 12, "The Chimp");
             counter = 1;
             Recipe = new int[3] { 1, 1, 1 };
             Day1 = new Day(7,1);
@@ -62,7 +63,7 @@ namespace LemonadeStand
         {            
             UserInterface.ViewInventory(MyPlayer.MyInventory.TotalInventory, MyPlayer.MyMoney);
             CheckContinuingGameplay();
-            string WhatNext =  UserInterface.MainMenu(Name);
+            WhatNext = UserInterface.MainMenu(Name);
 
             switch (WhatNext)
             {
@@ -122,53 +123,53 @@ namespace LemonadeStand
                     CurrentTemp = DetermineDay("daily");
                         
                     Proboscis.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    MyPlayer.UpdateDaily(Proboscis.HowMany);
                     CupChecker(Proboscis.HowMany);
+                    MyPlayer.UpdateDaily(Proboscis.HowMany);
                     UserInterface.CustomerPurchase(Proboscis.Name, Proboscis.CustomerThought);
 
                     Mandrill.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    MyPlayer.UpdateDaily(Mandrill.HowMany);
                     CupChecker(Mandrill.HowMany);
+                    MyPlayer.UpdateDaily(Mandrill.HowMany);
                     UserInterface.CustomerPurchase(Mandrill.Name, Mandrill.CustomerThought);
 
                     Macaque.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    MyPlayer.UpdateDaily(Macaque.HowMany);
                     CupChecker(Macaque.HowMany);
+                    MyPlayer.UpdateDaily(Macaque.HowMany);
                     UserInterface.CustomerPurchase(Macaque.Name, Macaque.CustomerThought);
 
                     Howler.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    MyPlayer.UpdateDaily(Howler.HowMany);
                     CupChecker(Howler.HowMany);
+                    MyPlayer.UpdateDaily(Howler.HowMany);
                     UserInterface.CustomerPurchase(Howler.Name, Howler.CustomerThought);
 
                     Baboon.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    MyPlayer.UpdateDaily(Baboon.HowMany);
                     CupChecker(Baboon.HowMany);
+                    MyPlayer.UpdateDaily(Baboon.HowMany);
                     UserInterface.CustomerPurchase(Baboon.Name, Baboon.CustomerThought);
 
                     Orangutan.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    MyPlayer.UpdateDaily(Orangutan.HowMany);
                     CupChecker(Orangutan.HowMany);
+                    MyPlayer.UpdateDaily(Orangutan.HowMany);
                     UserInterface.CustomerPurchase(Orangutan.Name, Orangutan.CustomerThought);
 
                     Bonobo.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    MyPlayer.UpdateDaily(Bonobo.HowMany);
                     CupChecker(Bonobo.HowMany);
+                    MyPlayer.UpdateDaily(Bonobo.HowMany);
                     UserInterface.CustomerPurchase(Bonobo.Name, Bonobo.CustomerThought);
 
                     Gibbon.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    MyPlayer.UpdateDaily(Gibbon.HowMany);
                     CupChecker(Gibbon.HowMany);
+                    MyPlayer.UpdateDaily(Gibbon.HowMany);
                     UserInterface.CustomerPurchase(Gibbon.Name, Gibbon.CustomerThought);
 
                     Gorilla.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    MyPlayer.UpdateDaily(Gorilla.HowMany);
                     CupChecker(Gorilla.HowMany);
+                    MyPlayer.UpdateDaily(Gorilla.HowMany);
                     UserInterface.CustomerPurchase(Gorilla.Name, Gorilla.CustomerThought);
 
                     Chimpanzee.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    MyPlayer.UpdateDaily(Chimpanzee.HowMany);
                     CupChecker(Chimpanzee.HowMany);
+                    MyPlayer.UpdateDaily(Chimpanzee.HowMany);
                     UserInterface.CustomerPurchase(Chimpanzee.Name, Chimpanzee.CustomerThought);
 
                     UpdateEndOfDay();
@@ -386,7 +387,7 @@ namespace LemonadeStand
             HasCups = MyPlayer.MyInventory.UpdateInventoryGame(HowMany);
             if (!HasCups) { UserInterface.NoMoreCups(); UpdateEndOfDay(); }
         }
-
+        //Here as well I moved this code to have it`s own method since it has the specific job of updating other methods
         public void UpdateEndOfDay()
         {
             MyPlayer.UpdateTotal(GameStore.CashSpent);

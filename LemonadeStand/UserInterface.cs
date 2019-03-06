@@ -65,7 +65,7 @@ namespace LemonadeStand
             Console.Write(TotalInventory[1] + " bag(s) of bugs, ");
             Console.Write(TotalInventory[2] + " bag(s) of ice, and ");
             Console.WriteLine(TotalInventory[3] + " cup(s).\n");
-            Console.WriteLine("You currently have $" + TotalMoney + " in your account.\n");
+            Console.WriteLine("You currently have " + TotalMoney + " grubs in your account.\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("----------------------------------------------------------------------------------------------------");
         }
@@ -78,10 +78,10 @@ namespace LemonadeStand
         public string StorePrices(double[] StorePrices)
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.Write("The current store prices are: $" + StorePrices[0] + " per banana, $");
-            Console.Write(StorePrices[1] + " per bag of bug, $");
-            Console.Write(StorePrices[2] + " per bag of ice, and $");
-            Console.WriteLine(StorePrices[3] + " per cup. \n");
+            Console.Write("The current store prices are: " + StorePrices[0] + " grubs per banana, ");
+            Console.Write(StorePrices[1] + " grubs per bag of bug, ");
+            Console.Write(StorePrices[2] + " grubs per bag of ice, and ");
+            Console.WriteLine(StorePrices[3] + " grubs per cup. \n");
             Console.WriteLine("What would you like to purchase? Bananas, bugs, ice, cups, or all?\n");
             string UserInput = Console.ReadLine();
             return UserInput.ToLower();
@@ -124,7 +124,7 @@ namespace LemonadeStand
         public string ChangePrice()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("What would you like to set the price as? (Hint, an average price is about $2.00) \n");
+            Console.WriteLine("What would you like to set the price as? (Hint: an average price is about 8 grubs) \n");
             string price = Console.ReadLine();
             return price;
 
@@ -133,14 +133,14 @@ namespace LemonadeStand
         public void DailySummary(int Day, double DailyProfit, double TotalProfit)
         {
             Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("Well done! You have made it to the end of Day " + Day + ".\n " +
-                "Your daily profit is: $" + DailyProfit +".\n" +
-                "Your total profit/loss is: $" + TotalProfit +".\n");
+            Console.WriteLine("Well done! You have made it to the end of Day " + Day + ".\n" +
+                "Your daily profit is: " + DailyProfit +" grubs.\n" +
+                "Your total profit/loss is: " + TotalProfit +" grubs.\n");
         }
 
         public void NoMoreCups()
         {
-            Console.WriteLine("It looks like you ran out of cups! Please visit the store to purchase more. The day is now over.\n");
+            Console.WriteLine("It looks like you ran out of cups for the last full order! Please visit the store to purchase more. The day is now over.\n");
         }
 
         public void TooMuchChange(int WhichOne)
@@ -150,7 +150,7 @@ namespace LemonadeStand
 
         public void SpentTooMuch()
         {
-            Console.WriteLine("You spent more money than you have! Go back to the store and try again.");
+            Console.WriteLine("You spent more grubs than you have! Go back to the store and try again.");
         }
 
         public void MakeYourNade()

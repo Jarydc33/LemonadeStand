@@ -8,7 +8,6 @@ namespace LemonadeStand
     {
         public Inventory MyInventory;
         public Recipe MyRecipe;
-        public MakeLemonade MyLemonade;
         public double MyMoney;
         public double MyPrice;
         public string MyName;
@@ -20,15 +19,14 @@ namespace LemonadeStand
         {
             MyInventory = new Inventory();
             MyRecipe = new Recipe();
-            MyLemonade = new MakeLemonade();
-            MyMoney = 35;
+            MyMoney = 65;
             Math.Round(MyMoney, 2, MidpointRounding.AwayFromZero);
-            MyPrice = 1.00;
+            MyPrice = 6;
             MyName = myname;
             DailyProfit = 0.00;
-            Math.Round(DailyProfit, 2, MidpointRounding.AwayFromZero);
+            Math.Round(DailyProfit, 1, MidpointRounding.AwayFromZero);
             TotalProfit = 0.00;
-            Math.Round(TotalProfit, 2, MidpointRounding.AwayFromZero);
+            Math.Round(TotalProfit, 1, MidpointRounding.AwayFromZero);
             HasMade = false;
 
         }
