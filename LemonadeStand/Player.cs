@@ -10,9 +10,9 @@ namespace LemonadeStand
         public Recipe MyRecipe;
         public int myMoney;
         public int myPrice;
-        public string MyName;
-        public int DailyProfit;
-        public int TotalProfit;
+        public string myName;
+        public int dailyProfit;
+        public int totalProfit;
         public bool hasMade;
 
         public Player(string myname)
@@ -21,31 +21,31 @@ namespace LemonadeStand
             MyRecipe = new Recipe();
             myMoney = 65;
             myPrice = 6;
-            MyName = myname;
-            DailyProfit = 0;
-            TotalProfit = 0;
+            myName = myname;
+            dailyProfit = 0;
+            totalProfit = 0;
             hasMade = false;
 
         }
 
-        public void UpdateDaily(int NewProfit)
+        public void UpdateDaily(int newProfit)
         {
-            NewProfit *= myPrice;
-            DailyProfit += NewProfit;
+            newProfit *= myPrice;
+            dailyProfit += newProfit;
             
         }
 
-        public void UpdateTotal(int CashSpent)
+        public void UpdateTotal(int cashSpent)
         {
-            DailyProfit -= CashSpent;
-            TotalProfit += DailyProfit;
+            dailyProfit -= cashSpent;
+            totalProfit += dailyProfit;
             
             
         }
 
         public void ResetDaily()
         {
-            DailyProfit = 0;            
+            dailyProfit = 0;            
             hasMade = false;
         }
 

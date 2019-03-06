@@ -8,80 +8,80 @@ namespace LemonadeStand
     {
         public int lemonPrice;
         public int cupPrice;
-        public int SugarPrice;
-        public int IcePrice;
+        public int sugarPrice;
+        public int icePrice;
         public int[] storePrices;
-        public int CashSpent;
+        public int cashSpent;
 
         public Store()
         {
             storePrices = new int[4];
             lemonPrice = 2;
             storePrices[0] = lemonPrice;
-            SugarPrice = 3;
-            storePrices[1] = SugarPrice;
-            IcePrice = 5;
-            storePrices[2] = IcePrice;
+            sugarPrice = 3;
+            storePrices[1] = sugarPrice;
+            icePrice = 5;
+            storePrices[2] = icePrice;
             cupPrice = 1;
             storePrices[3] = cupPrice;
-            CashSpent = 0;
+            cashSpent = 0;
         }
 
-        public int Cashier(int WhichItem, int TotalCash, int[]MyTotalInventory, int AmountPurchased)
+        public int Cashier(int whichItem, int totalCash, int[]myTotalInventory, int amountPurchased)
         {
-            int StartingCash = TotalCash;
+            int startingCash = totalCash;
             
-            switch (WhichItem)
+            switch (whichItem)
             {
                 case 1:
-                    TotalCash -= lemonPrice * AmountPurchased;
-                    MyTotalInventory[0] += AmountPurchased;
-                    CashSpent = StartingCash - TotalCash;
+                    totalCash -= lemonPrice * amountPurchased;
+                    myTotalInventory[0] += amountPurchased;
+                    cashSpent = startingCash - totalCash;
                     break;
 
                 case 2:
-                    TotalCash -= SugarPrice * AmountPurchased;
-                    MyTotalInventory[1] += AmountPurchased;
-                    CashSpent = StartingCash - TotalCash;
+                    totalCash -= sugarPrice * amountPurchased;
+                    myTotalInventory[1] += amountPurchased;
+                    cashSpent = startingCash - totalCash;
                     break;
                                    
                 case 3:
-                    TotalCash -= IcePrice * AmountPurchased;
-                    MyTotalInventory[2] += AmountPurchased;
-                    CashSpent = StartingCash - TotalCash;
+                    totalCash -= icePrice * amountPurchased;
+                    myTotalInventory[2] += amountPurchased;
+                    cashSpent = startingCash - totalCash;
                     break;
 
                 case 4:
-                    TotalCash -= cupPrice * AmountPurchased;
-                    MyTotalInventory[3] += AmountPurchased;
-                    CashSpent = StartingCash - TotalCash;
+                    totalCash -= cupPrice * amountPurchased;
+                    myTotalInventory[3] += amountPurchased;
+                    cashSpent = startingCash - totalCash;
                     break;
 
                 case 5:
-                    TotalCash -= lemonPrice * AmountPurchased;
-                    TotalCash -= SugarPrice * AmountPurchased;
-                    TotalCash -= IcePrice * AmountPurchased;
-                    TotalCash -= cupPrice * AmountPurchased;
+                    totalCash -= lemonPrice * amountPurchased;
+                    totalCash -= sugarPrice * amountPurchased;
+                    totalCash -= icePrice * amountPurchased;
+                    totalCash -= cupPrice * amountPurchased;
 
-                    if (TotalCash < 0)
+                    if (totalCash < 0)
                     {
-                        return StartingCash;
+                        return startingCash;
                     }
 
-                    MyTotalInventory[0] += AmountPurchased;
-                    MyTotalInventory[1] += AmountPurchased;
-                    MyTotalInventory[2] += AmountPurchased;
-                    MyTotalInventory[3] += AmountPurchased;
+                    myTotalInventory[0] += amountPurchased;
+                    myTotalInventory[1] += amountPurchased;
+                    myTotalInventory[2] += amountPurchased;
+                    myTotalInventory[3] += amountPurchased;
 
-                    CashSpent = StartingCash - TotalCash;
+                    cashSpent = startingCash - totalCash;
                     break;                   
             }
-                return TotalCash;
+                return totalCash;
         }
 
         public void CashSpentReset()
         {
-            CashSpent = 0;
+            cashSpent = 0;
             
         }
 

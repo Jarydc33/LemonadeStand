@@ -6,42 +6,42 @@ namespace LemonadeStand
 {
     public class Recipe
     {
-        public int HowSweet;
-        public int HowCold;
+        public int howSweet;
+        public int howCold;
         
 
         public Recipe()
         {
-            HowSweet = 1;
-            HowCold = 1;
+            howSweet = 1;
+            howCold = 1;
         }
 
-        public void ChangeRecipe(int[]NewRecipe)
+        public void ChangeRecipe(int[]newRecipe)
         {
-            if(NewRecipe[0] == NewRecipe[1])
+            if(newRecipe[0] == newRecipe[1])
             {
-                HowSweet = 2;
+                howSweet = 2;
             }
-            else if(NewRecipe[1] > NewRecipe[0])
+            else if(newRecipe[1] > newRecipe[0])
             {
-                HowSweet = 1;
+                howSweet = 1;
             }
-            else if (NewRecipe[1] == 0)
+            else if (newRecipe[1] == 0)
             {
-                HowSweet = 4;
+                howSweet = 4;
             }
-            else if (NewRecipe[0] > NewRecipe[1])
+            else if (newRecipe[0] > newRecipe[1])
             {
-                HowSweet = 3;
+                howSweet = 3;
             }
 
-            if (NewRecipe[2] == 0)
+            if (newRecipe[2] == 0)
             {
-                HowCold = 0;
+                howCold = 0;
             }
-            else if (NewRecipe[2] >= 1)
+            else if (newRecipe[2] >= 1)
             {
-                HowCold = 1;
+                howCold = 1;
             }
             
         }

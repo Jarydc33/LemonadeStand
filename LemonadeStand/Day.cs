@@ -6,7 +6,7 @@ namespace LemonadeStand
 {
     public class Day
     {        
-        public Weather Forecast;
+        Weather Forecast;
         public int temp;
         public int[] sevenDay;
 
