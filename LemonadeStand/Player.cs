@@ -22,12 +22,13 @@ namespace LemonadeStand
             MyRecipe = new Recipe();
             MyLemonade = new MakeLemonade();
             MyMoney = 35;
+            Math.Round(MyMoney, 2, MidpointRounding.AwayFromZero);
             MyPrice = 1.00;
             MyName = myname;
             DailyProfit = 0.00;
-            Math.Round(DailyProfit, 2, MidpointRounding.ToEven);
+            Math.Round(DailyProfit, 2, MidpointRounding.AwayFromZero);
             TotalProfit = 0.00;
-            Math.Round(TotalProfit, 2, MidpointRounding.ToEven);
+            Math.Round(TotalProfit, 2, MidpointRounding.AwayFromZero);
             HasMade = false;
 
         }
@@ -49,7 +50,7 @@ namespace LemonadeStand
 
         public void ResetDaily()
         {
-            DailyProfit = 0.00;
+            DailyProfit = 0.00;            
             HasMade = false;
         }
 

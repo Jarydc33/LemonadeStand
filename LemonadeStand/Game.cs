@@ -68,22 +68,27 @@ namespace LemonadeStand
                                     
                 case "store":
                     string UserInput = UserInterface.StorePrices(GameStore.StorePrices);
-                    int AmountPurchased = UserInterface.PurchaseAmount();
-                    PurchaseItems(UserInput, AmountPurchased);
+                    string AmountPurchased = UserInterface.PurchaseAmount();
+                    int PurchaseParsed = AttemptParseInt(AmountPurchased);
+                    PurchaseItems(UserInput, PurchaseParsed);
                     GamePlay();
                     break;
 
                 case "recipe":
                     UserInterface.ViewRecipe(Recipe);
-                    Recipe = UserInterface.ChangeRecipe();
+                    string[] PotentialRecipe = UserInterface.ChangeRecipe();
+                    Recipe[0] = AttemptParseInt(PotentialRecipe[0]);
+                    Recipe[1] = AttemptParseInt(PotentialRecipe[1]);
+                    Recipe[2] = AttemptParseInt(PotentialRecipe[2]);
                     MyPlayer.MyRecipe.ChangeRecipe(Recipe);
                     Console.Clear();
                     GamePlay();
                     break;
 
                 case "price":
-                    double price = UserInterface.ChangePrice();
-                    MyPlayer.MyPrice = price;
+                    string potentialprice = UserInterface.ChangePrice();
+                    double NewPrice = AttemptParseDouble(potentialprice);
+                    MyPlayer.MyPrice = NewPrice;
                     Console.Clear();
                     GamePlay();
                     break;
@@ -132,10 +137,11 @@ namespace LemonadeStand
                         UserInterface.CustomerPurchase(Thor.Name, Thor.CustomerThought);                        
                     }
                     MyPlayer.UpdateTotal(GameStore.CashSpent);
-                    if(MyPlayer.TotalProfit > 0) { MyPlayer.MyMoney += MyPlayer.TotalProfit; }
+                    if(MyPlayer.TotalProfit > 0) { MyPlayer.MyMoney += MyPlayer.DailyProfit; }
                     UserInterface.DailySummary(counter, MyPlayer.DailyProfit, MyPlayer.TotalProfit);
-                    counter++;
+                    CounterChecker();
                     MyPlayer.ResetDaily();
+                    GameStore.CashSpentReset();
                     GamePlay();
                     break;
 
@@ -231,6 +237,8 @@ namespace LemonadeStand
         }
 
         public void PurchaseItems(string UserInput, int TotalPurchased) {
+                        
+            double StartingCash = MyPlayer.MyMoney;
 
             switch (UserInput)
             {
@@ -253,6 +261,76 @@ namespace LemonadeStand
                 case "all":
                     MyPlayer.MyMoney = GameStore.Cashier(5, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
                     break;
+
+                default:
+                    UserInterface.DefaultResponse();
+                    GamePlay();
+                    break;
+            }
+
+            if(MyPlayer.MyMoney == StartingCash)
+            {
+                UserInterface.SpentTooMuch();                
+                GamePlay();
+            }
+            else
+            {
+                GamePlay();
+            }
+        }
+
+        public void CounterChecker()
+        {
+            counter++;
+            if(counter > 7)
+            {
+                string BeginAgain = UserInterface.EndGame();
+                if(BeginAgain == "yes")
+                {
+                    Console.Clear();
+                    Game NewGame = new Game();
+                }
+                else if(BeginAgain == "no")
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    UserInterface.DefaultResponse();
+                    CounterChecker();
+                }
+            }
+        }
+
+        public int AttemptParseInt(string UserInput)
+        {
+            int SuccessfulParse;
+            bool attempt = Int32.TryParse(UserInput, out SuccessfulParse);
+            if (attempt)
+            {
+                return SuccessfulParse;
+            }
+            else
+            {
+                UserInterface.DefaultResponse();
+                GamePlay();
+                return 0;
+            }
+        }
+
+        public double AttemptParseDouble(string UserInput)
+        {
+            double SuccessfulParse;
+            bool attempt = Double.TryParse(UserInput, out SuccessfulParse);
+            if (attempt)
+            {
+                return SuccessfulParse;
+            }
+            else
+            {
+                UserInterface.DefaultResponse();
+                GamePlay();
+                return 0;
             }
         }
     }

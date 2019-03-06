@@ -17,7 +17,7 @@ namespace LemonadeStand
         public Customer(int preference, int temppref, double priceRoof, string name)
         {
             Preference = new int[2];
-            Opinion = new string[4];
+            Opinion = new string[5];
             Preference[0] = preference;
             Preference[1] = temppref;
             PriceRoof = priceRoof;
@@ -26,18 +26,28 @@ namespace LemonadeStand
             Opinion[1] = " says: This is too expensive for me!";
             Opinion[2] = " says: Yummy. This is delicious!";
             Opinion[3] = " says: This is too sweet for me!";
-            HowMany = 0;
+            Opinion[4] = " says: You didn`t even put ice in this!";
         }
 
         public void Purchase(int HowSweet, int HowCold, double CurrentPrice, int[] Temperature)
         {
             HowMany = 0;
-            if(Temperature[0] > 83)
+            if(Temperature[0] > 85)
             {
                 HowMany = 1;
                 Console.WriteLine("Hit above 83");
             }
-            if(CurrentPrice > PriceRoof)
+            else if(Temperature[0] > 100)
+            {
+                HowMany = 2;
+                Console.WriteLine("Hit above 100!");
+            }
+
+            if(HowCold == 0)
+            {
+                CustomerThought = Opinion[1];
+            }
+            else if(CurrentPrice > PriceRoof)
             {
                 CustomerThought = Opinion[1];
             }

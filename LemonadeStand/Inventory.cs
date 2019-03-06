@@ -15,13 +15,13 @@ namespace LemonadeStand
         public Inventory()
         {
             TotalInventory = new int[4];
-            Lemons = 0;
+            Lemons = 5;
             TotalInventory[0] = Lemons;
-            Sugar = 0;
+            Sugar = 3;
             TotalInventory[1] = Sugar;
-            Ice = 0;
+            Ice = 3;
             TotalInventory[2] = Ice;
-            Cups = 0;
+            Cups = 35;
             TotalInventory[3] = Cups;
         }
 
@@ -49,12 +49,12 @@ namespace LemonadeStand
             
         }
         public bool UpdateInventoryGame(int CupChange)
-        {
-            TotalInventory[3] -= CupChange;
-            if(TotalInventory[3] <= 0)
+        {            
+            if(TotalInventory[3] < CupChange)
             {
                 return false;
             }
+            TotalInventory[3] -= CupChange;
             return true;
         }
         

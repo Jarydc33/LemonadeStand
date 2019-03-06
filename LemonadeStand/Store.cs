@@ -30,49 +30,60 @@ namespace LemonadeStand
         public double Cashier(int WhichItem, double TotalCash, int[]MyTotalInventory, int AmountPurchased)
         {
             double StartingCash = TotalCash;
+            
             switch (WhichItem)
             {
                 case 1:
                     TotalCash -= LemonPrice * AmountPurchased;
                     MyTotalInventory[0] += AmountPurchased;
                     CashSpent = StartingCash - TotalCash;
-                    return TotalCash;
+                    break;
 
                 case 2:
                     TotalCash -= SugarPrice * AmountPurchased;
                     MyTotalInventory[1] += AmountPurchased;
                     CashSpent = StartingCash - TotalCash;
-                    return TotalCash;
+                    break;
                                    
                 case 3:
                     TotalCash -= IcePrice * AmountPurchased;
                     MyTotalInventory[2] += AmountPurchased;
                     CashSpent = StartingCash - TotalCash;
-                    return TotalCash;
+                    break;
 
                 case 4:
                     TotalCash -= CupPrice * AmountPurchased;
                     MyTotalInventory[3] += AmountPurchased;
                     CashSpent = StartingCash - TotalCash;
-                    return TotalCash;
+                    break;
 
                 case 5:
                     TotalCash -= LemonPrice * AmountPurchased;
-                    MyTotalInventory[0] += AmountPurchased;
-
                     TotalCash -= SugarPrice * AmountPurchased;
-                    MyTotalInventory[1] += AmountPurchased;
-
                     TotalCash -= IcePrice * AmountPurchased;
-                    MyTotalInventory[2] += AmountPurchased;
-
                     TotalCash -= CupPrice * AmountPurchased;
+
+                    if (TotalCash < 0)
+                    {
+                        return StartingCash;
+                    }
+
+                    MyTotalInventory[0] += AmountPurchased;
+                    MyTotalInventory[1] += AmountPurchased;
+                    MyTotalInventory[2] += AmountPurchased;
                     MyTotalInventory[3] += AmountPurchased;
+
                     CashSpent = StartingCash - TotalCash;
-                    return TotalCash;                    
+                    break;
+                    //return TotalCash;                    
             }
+                return TotalCash;
+        }
+
+        public void CashSpentReset()
+        {
+            CashSpent = 0;
             
-            return TotalCash;
         }
 
     }

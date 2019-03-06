@@ -10,20 +10,21 @@ namespace LemonadeStand
         public int[] TempPlace;
         public int DailyTemp;
         public int CurrentDay;
+        Random rnd;
 
         public Weather(int daysleft, int currentday)
         {
             DaysLeft = daysleft;
             TempPlace = new int[daysleft];
             CurrentDay = currentday - 1;
+            rnd = new Random();
         }
 
         public int[] SevenForecast()
-        {
-            System.Random rnd = new System.Random();
+        {            
             for (int i = 0; i < DaysLeft; i++)
             {
-                TempPlace[i] = rnd.Next(69, 90);
+                TempPlace[i] = rnd.Next(75, 105);
             }
             return TempPlace;
         }
@@ -31,6 +32,7 @@ namespace LemonadeStand
         public int DailyWeather()
         {
             DailyTemp = TempPlace[0];
+            DailyTemp = rnd.Next(DailyTemp - 2, DailyTemp +2);
             return DailyTemp;
            
         }

@@ -25,13 +25,15 @@ namespace LemonadeStand
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Welcome to the Main Menu " + Name + ", what would you like to do? \n");
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("To view the daily forecast, type daily \n");
-            Console.WriteLine("To view the weekly forecast, type weekly \n");
-            Console.WriteLine("To visit the store, type store \n");
-            Console.WriteLine("To start the next day, type start \n");
-            Console.WriteLine("To change your current recipe, type recipe \n");
-            Console.WriteLine("To change the price of the lemonade, type price \n");
-            Console.WriteLine("To make the lemonade, type make \n");
+            Console.WriteLine("To view the daily forecast, type DAILY \n");
+            Console.WriteLine("To view the weekly forecast, type WEEKLY \n");
+            Console.WriteLine("To visit the store, type STORE \n");
+            Console.WriteLine("To change your current recipe, type RECIPE \n");
+            Console.WriteLine("To change the price of the lemonade, type PRICE \n");
+            Console.WriteLine("To make the lemonade, type MAKE \n");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("To start the next day, type START \n");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             string WhatNext = Console.ReadLine();
             Console.Clear();
             return WhatNext;
@@ -82,14 +84,14 @@ namespace LemonadeStand
             Console.WriteLine(StorePrices[3] + " per cup. \n");
             Console.WriteLine("What would you like to purchase? Lemons, sugar, ice, cups, or all?\n");
             string UserInput = Console.ReadLine();
-            return UserInput;
+            return UserInput.ToLower();
         }
 
-        public int PurchaseAmount()
+        public string PurchaseAmount()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("How many would you like to purchase?\n");
-            int AmountPurchased = int.Parse(Console.ReadLine());
+            string AmountPurchased = Console.ReadLine();
             Console.Clear();
             return AmountPurchased;
         }
@@ -99,18 +101,18 @@ namespace LemonadeStand
             Console.WriteLine("The current recipe is: " + CurrentRecipe[0] + " lemon(s), " + CurrentRecipe[1] + " bag(s) of sugar, " + CurrentRecipe[2] +" bag(s) of ice.\n");
         }
 
-        public int[] ChangeRecipe()
+        public string[] ChangeRecipe()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            int[] Recipe = new int[3];
+            string[] Recipe = new string[3];
             Console.WriteLine("The recipe will consist of a combination of lemons, sugar, and ice. The more lemons, the more sour it will be." +
                 "The more sugar, the sweeter and so on.\n");
             Console.WriteLine("How many lemons would you like to add?");
-            Recipe[0] = int.Parse(Console.ReadLine());
+            Recipe[0] = Console.ReadLine();
             Console.WriteLine("How many pounds of sugar would you like to add?");
-            Recipe[1] = int.Parse(Console.ReadLine());
+            Recipe[1] = Console.ReadLine();
             Console.WriteLine("How many bags of ice would you like to add?");
-            Recipe[2] = int.Parse(Console.ReadLine());
+            Recipe[2] = Console.ReadLine();
             return Recipe;
         }
         
@@ -120,11 +122,11 @@ namespace LemonadeStand
             Console.WriteLine(name + opinion + "\n");
         }
 
-        public double ChangePrice()
+        public string ChangePrice()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("What would you like to set the price as? (Hint, an average price is about $2.00) \n");
-            double price = double.Parse(Console.ReadLine());
+            string price = Console.ReadLine();
             return price;
 
         }
@@ -147,6 +149,11 @@ namespace LemonadeStand
             Console.WriteLine("You used more inventory than you currently have, please visit the store to get more supplies!\n");
         }
 
+        public void SpentTooMuch()
+        {
+            Console.WriteLine("You spent more money than you have! Go back to the store and try again.");
+        }
+
         public void MakeYourNade()
         {
             Console.WriteLine("You have to make your lemonade before you can sell it!\n");
@@ -155,6 +162,13 @@ namespace LemonadeStand
         public void MakingYourLemonade()
         {
             Console.WriteLine("Your lemonade has been made!\n");
+        }
+                
+        public string EndGame()
+        {
+            Console.WriteLine("It appears that you made it to the end of the day! Would you like to play again? Type yes or no");
+            string Ending = Console.ReadLine();
+            return Ending;
         }
     }
 }
