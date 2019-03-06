@@ -6,8 +6,8 @@ namespace LemonadeStand
 {
     public class Inventory
     {
-        public int Lemons;
-        public int Sugar;
+        public int Bananas;
+        public int Bugs;
         public int Ice;
         public int Cups;
         public int[] TotalInventory;
@@ -15,10 +15,10 @@ namespace LemonadeStand
         public Inventory()
         {
             TotalInventory = new int[4];
-            Lemons = 5;
-            TotalInventory[0] = Lemons;
-            Sugar = 3;
-            TotalInventory[1] = Sugar;
+            Bananas = 5;
+            TotalInventory[0] = Bananas;
+            Bugs = 3;
+            TotalInventory[1] = Bugs;
             Ice = 3;
             TotalInventory[2] = Ice;
             Cups = 35;

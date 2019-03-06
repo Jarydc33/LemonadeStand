@@ -9,10 +9,16 @@ namespace LemonadeStand
         public UserInterface UserInterface;
         public Player MyPlayer;
         public Store GameStore;
-        public Customer Russian;
-        public Customer American;
-        public Customer Duck;
-        public Customer Thor;
+        public Customer Proboscis;
+        public Customer Mandrill;
+        public Customer Macaque;
+        public Customer Howler;
+        public Customer Baboon;
+        public Customer Orangutan;
+        public Customer Bonobo;
+        public Customer Gibbon;
+        public Customer Gorilla;
+        public Customer Chimpanzee;
         public string Name;
         public int counter;
         public Day Day1;
@@ -28,10 +34,16 @@ namespace LemonadeStand
         {
             UserInterface = new UserInterface();
             GameStore = new Store();
-            Russian = new Customer(4, 3, 2.0, "Igor the Russian");
-            American = new Customer(1, 3, 3.5, "David the American");
-            Duck = new Customer(2, 1, 5.65, "Mallory the duck");
-            Thor = new Customer(3, 2, 2.55, "Thor, god of thunder");
+            Proboscis = new Customer(4, 3, 2.0, "The Proboscis monkey");
+            Mandrill = new Customer(1, 3, 3.5, "The Mandrill");
+            Macaque = new Customer(2, 1, 5.65, "The Macaque");
+            Howler = new Customer(3, 2, 2.55, "The Howler monkey");
+            Baboon = new Customer(3, 2, 2.55, "The Baboon");
+            Orangutan = new Customer(2, 2, 2.55, "The Orangutan");
+            Bonobo = new Customer(1, 2, 2.55, "The Bonobo");
+            Gibbon = new Customer(2, 2, 2.55, "The Gibbon");
+            Gorilla = new Customer(4, 2, 2.55, "The Gorilla");
+            Chimpanzee = new Customer(1, 2, 2.55, "The Chimp");
             counter = 1;
             Recipe = new int[3] { 1, 1, 1 };
             Day1 = new Day(7,1);
@@ -49,7 +61,7 @@ namespace LemonadeStand
         public void GamePlay()
         {            
             UserInterface.ViewInventory(MyPlayer.MyInventory.TotalInventory, MyPlayer.MyMoney);
-            
+            CheckContinuingGameplay();
             string WhatNext =  UserInterface.MainMenu(Name);
 
             switch (WhatNext)
@@ -70,7 +82,7 @@ namespace LemonadeStand
                     string UserInput = UserInterface.StorePrices(GameStore.StorePrices);
                     string AmountPurchased = UserInterface.PurchaseAmount();
                     int PurchaseParsed = AttemptParseInt(AmountPurchased);
-                    PurchaseItems(UserInput, PurchaseParsed);
+                    PurchaseItems(UserInput.ToLower(), PurchaseParsed);
                     GamePlay();
                     break;
 
@@ -106,43 +118,60 @@ namespace LemonadeStand
 
                     if (!MyPlayer.HasMade) { UserInterface.MakeYourNade(); GamePlay(); }
                     int[] CurrentTemp = new int[1];
-                    bool HasCups = true;
-                    for (int i = 0; i < 2; i++)
-                    {
-                        CurrentTemp = DetermineDay("daily");
-
+                    
+                    CurrentTemp = DetermineDay("daily");
                         
-                        Russian.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                        MyPlayer.UpdateDaily(Russian.HowMany);
-                        HasCups = MyPlayer.MyInventory.UpdateInventoryGame(Russian.HowMany);
-                        if (!HasCups) { UserInterface.NoMoreCups(); break; }
-                        UserInterface.CustomerPurchase(Russian.Name, Russian.CustomerThought);
-                                                
-                        American.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                        MyPlayer.UpdateDaily(American.HowMany);
-                        HasCups = MyPlayer.MyInventory.UpdateInventoryGame(American.HowMany);
-                        if (!HasCups) { UserInterface.NoMoreCups(); break; }
-                        UserInterface.CustomerPurchase(American.Name, American.CustomerThought);
+                    Proboscis.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                    MyPlayer.UpdateDaily(Proboscis.HowMany);
+                    CupChecker(Proboscis.HowMany);
+                    UserInterface.CustomerPurchase(Proboscis.Name, Proboscis.CustomerThought);
 
-                        Duck.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                        MyPlayer.UpdateDaily(Duck.HowMany);
-                        HasCups = MyPlayer.MyInventory.UpdateInventoryGame(Duck.HowMany);
-                        if (!HasCups) { UserInterface.NoMoreCups(); break; }
-                        UserInterface.CustomerPurchase(Duck.Name, Duck.CustomerThought);
+                    Mandrill.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                    MyPlayer.UpdateDaily(Mandrill.HowMany);
+                    CupChecker(Mandrill.HowMany);
+                    UserInterface.CustomerPurchase(Mandrill.Name, Mandrill.CustomerThought);
 
-                        Thor.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                        MyPlayer.UpdateDaily(Thor.HowMany);
-                        HasCups = MyPlayer.MyInventory.UpdateInventoryGame(Thor.HowMany);
-                        if (!HasCups) { UserInterface.NoMoreCups(); break; }
-                        UserInterface.CustomerPurchase(Thor.Name, Thor.CustomerThought);                        
-                    }
-                    MyPlayer.UpdateTotal(GameStore.CashSpent);
-                    if(MyPlayer.TotalProfit > 0) { MyPlayer.MyMoney += MyPlayer.DailyProfit; }
-                    UserInterface.DailySummary(counter, MyPlayer.DailyProfit, MyPlayer.TotalProfit);
-                    CounterChecker();
-                    MyPlayer.ResetDaily();
-                    GameStore.CashSpentReset();
-                    GamePlay();
+                    Macaque.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                    MyPlayer.UpdateDaily(Macaque.HowMany);
+                    CupChecker(Macaque.HowMany);
+                    UserInterface.CustomerPurchase(Macaque.Name, Macaque.CustomerThought);
+
+                    Howler.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                    MyPlayer.UpdateDaily(Howler.HowMany);
+                    CupChecker(Howler.HowMany);
+                    UserInterface.CustomerPurchase(Howler.Name, Howler.CustomerThought);
+
+                    Baboon.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                    MyPlayer.UpdateDaily(Baboon.HowMany);
+                    CupChecker(Baboon.HowMany);
+                    UserInterface.CustomerPurchase(Baboon.Name, Baboon.CustomerThought);
+
+                    Orangutan.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                    MyPlayer.UpdateDaily(Orangutan.HowMany);
+                    CupChecker(Orangutan.HowMany);
+                    UserInterface.CustomerPurchase(Orangutan.Name, Orangutan.CustomerThought);
+
+                    Bonobo.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                    MyPlayer.UpdateDaily(Bonobo.HowMany);
+                    CupChecker(Bonobo.HowMany);
+                    UserInterface.CustomerPurchase(Bonobo.Name, Bonobo.CustomerThought);
+
+                    Gibbon.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                    MyPlayer.UpdateDaily(Gibbon.HowMany);
+                    CupChecker(Gibbon.HowMany);
+                    UserInterface.CustomerPurchase(Gibbon.Name, Gibbon.CustomerThought);
+
+                    Gorilla.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                    MyPlayer.UpdateDaily(Gorilla.HowMany);
+                    CupChecker(Gorilla.HowMany);
+                    UserInterface.CustomerPurchase(Gorilla.Name, Gorilla.CustomerThought);
+
+                    Chimpanzee.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                    MyPlayer.UpdateDaily(Chimpanzee.HowMany);
+                    CupChecker(Chimpanzee.HowMany);
+                    UserInterface.CustomerPurchase(Chimpanzee.Name, Chimpanzee.CustomerThought);
+
+                    UpdateEndOfDay();
                     break;
 
                 default:
@@ -242,11 +271,11 @@ namespace LemonadeStand
 
             switch (UserInput)
             {
-                case "lemons":
+                case "bananas":
                     MyPlayer.MyMoney = GameStore.Cashier(1, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
                     break;
 
-                case "sugar":
+                case "bugs":
                     MyPlayer.MyMoney = GameStore.Cashier(2, MyPlayer.MyMoney, MyPlayer.MyInventory.TotalInventory, TotalPurchased);
                     break;
 
@@ -332,6 +361,41 @@ namespace LemonadeStand
                 GamePlay();
                 return 0;
             }
+        }
+
+        public void CheckContinuingGameplay()
+        {
+            if(MyPlayer.MyMoney == 0)
+            {
+                for(int i = 0; i < MyPlayer.MyInventory.TotalInventory.Length; i++)
+                {
+                    if(MyPlayer.MyInventory.TotalInventory[i] == 0)
+                    {
+                        UserInterface.NoMoreStuff();
+                        counter = 8;
+                        CounterChecker();
+                    }
+                }
+            }
+        }
+        //Specifically moved this from the Start case to it`s own method in an attempt to keep to the S of SOLID.
+        public void CupChecker(int HowMany)
+        {
+            bool HasCups = true;
+
+            HasCups = MyPlayer.MyInventory.UpdateInventoryGame(HowMany);
+            if (!HasCups) { UserInterface.NoMoreCups(); UpdateEndOfDay(); }
+        }
+
+        public void UpdateEndOfDay()
+        {
+            MyPlayer.UpdateTotal(GameStore.CashSpent);
+            if (MyPlayer.TotalProfit > 0) { MyPlayer.MyMoney += MyPlayer.DailyProfit; }
+            UserInterface.DailySummary(counter, MyPlayer.DailyProfit, MyPlayer.TotalProfit);
+            CounterChecker();
+            MyPlayer.ResetDaily();
+            GameStore.CashSpentReset();
+            GamePlay();
         }
     }
 }

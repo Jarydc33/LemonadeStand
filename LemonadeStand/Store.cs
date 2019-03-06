@@ -74,8 +74,7 @@ namespace LemonadeStand
                     MyTotalInventory[3] += AmountPurchased;
 
                     CashSpent = StartingCash - TotalCash;
-                    break;
-                    //return TotalCash;                    
+                    break;                   
             }
                 return TotalCash;
         }
