@@ -11,9 +11,9 @@ namespace LemonadeStand
         public string Name;
         public int HowMany;
         public string CustomerThought;
-        double PriceRoof;
+        public int PriceRoof;
 
-        public Customer(int preference, double priceRoof, string name)
+        public Customer(int preference, int priceRoof, string name)
         {            
             Opinion = new string[5];
             Preference = preference;
@@ -26,14 +26,14 @@ namespace LemonadeStand
             Opinion[4] = " says: You didn`t even put ice in this!";
         }
 
-        public void Purchase(int HowSweet, int HowCold, double CurrentPrice, int[] Temperature)
+        public void Purchase(int HowSweet, int HowCold, double CurrentPrice, int Temperature)
         {
             HowMany = 0;
-            if(Temperature[0] > 85)
+            if(Temperature > 85)
             {
                 HowMany = 1;
             }
-            else if(Temperature[0] > 100)
+            else if(Temperature > 100)
             {
                 HowMany = 2;
             }

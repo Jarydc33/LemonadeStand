@@ -9,53 +9,39 @@ namespace LemonadeStand
         public UserInterface UserInterface;
         public Player MyPlayer;
         public Store GameStore;
-        public Customer Proboscis;
-        public Customer Mandrill;
-        public Customer Macaque;
-        public Customer Howler;
-        public Customer Baboon;
-        public Customer Orangutan;
-        public Customer Bonobo;
-        public Customer Gibbon;
-        public Customer Gorilla;
-        public Customer Chimpanzee;
-        public string Name;
-        public string WhatNext;
+        public List<Customer> customerList;
+        public List<Day> dayList;
+        public string name;
+        public string whatNext;
         public int counter;
-        public Day Day1;
-        public Day Day2;
-        public Day Day3;
-        public Day Day4;
-        public Day Day5;
-        public Day Day6;
-        public Day Day7;
-        int[] Recipe;
+        public Day day1;
+        public Day day2;
+        public Day day3;
+        public Day day4;
+        public Day day5;
+        public Day day6;
+        public Day day7;
+        Random gen = new Random();
+        int[] recipe;
 
         public Game()
         {
             UserInterface = new UserInterface();
             GameStore = new Store();
-            Proboscis = new Customer(4, 10, "The Proboscis monkey");
-            Mandrill = new Customer(1, 13, "The Mandrill");
-            Macaque = new Customer(2, 7, "The Macaque");
-            Howler = new Customer(3, 15, "The Howler monkey");
-            Baboon = new Customer(3, 9, "The Baboon");
-            Orangutan = new Customer(2, 9, "The Orangutan");
-            Bonobo = new Customer(1, 11, "The Bonobo");
-            Gibbon = new Customer(2, 10, "The Gibbon");
-            Gorilla = new Customer(4, 13, "The Gorilla");
-            Chimpanzee = new Customer(1, 12, "The Chimp");
-            counter = 1;
-            Recipe = new int[3] { 1, 1, 1 };
-            Day1 = new Day(7,1);
-            Day2 = new Day(6,2);
-            Day3 = new Day(5,3);
-            Day4 = new Day(4,4);
-            Day5 = new Day(3,5);
-            Day6 = new Day(2,6);
-            Day7 = new Day(1,7);
-            Name = UserInterface.Welcome();
-            MyPlayer = new Player(Name);
+            customerList = new List<Customer>();
+            dayList = new List<Day>();
+            counter = 0;
+            recipe = new int[3] { 1, 1, 1 };
+            day1 = new Day(7,1);
+            day2 = new Day(6,2);
+            day3 = new Day(5,3);
+            day4 = new Day(4,4);
+            day5 = new Day(3,5);
+            day6 = new Day(2,6);
+            day7 = new Day(1,7);
+            name = UserInterface.Welcome();
+            MyPlayer = new Player(name);
+            CreateDays();
             GamePlay();
         }
 
@@ -63,19 +49,20 @@ namespace LemonadeStand
         {            
             UserInterface.ViewInventory(MyPlayer.MyInventory.TotalInventory, MyPlayer.MyMoney);
             CheckContinuingGameplay();
-            WhatNext = UserInterface.MainMenu(Name);
+            whatNext = UserInterface.MainMenu(name);
 
-            switch (WhatNext)
+            switch (whatNext)
             {
                 case "daily":
-                    int[] temp = DetermineDay("daily");
-                    UserInterface.OutputDaily(temp[0]);
+                    //int[] temp = DetermineDay("daily");
+
+                    UserInterface.OutputDaily(dayList[counter].temp);
                     GamePlay();
                     break;
 
                 case "weekly":
-                    int[] forecast = DetermineDay("weekly");
-                    UserInterface.OutputWeekly(forecast);
+                    //int[] forecast = DetermineDay("weekly");
+                    UserInterface.OutputWeekly(dayList[counter].SevenDay);
                     GamePlay();
                     break;
                                     
@@ -88,12 +75,12 @@ namespace LemonadeStand
                     break;
 
                 case "recipe":
-                    UserInterface.ViewRecipe(Recipe);
+                    UserInterface.ViewRecipe(recipe);
                     string[] PotentialRecipe = UserInterface.ChangeRecipe();
-                    Recipe[0] = AttemptParseInt(PotentialRecipe[0]);
-                    Recipe[1] = AttemptParseInt(PotentialRecipe[1]);
-                    Recipe[2] = AttemptParseInt(PotentialRecipe[2]);
-                    MyPlayer.MyRecipe.ChangeRecipe(Recipe);
+                    recipe[0] = AttemptParseInt(PotentialRecipe[0]);
+                    recipe[1] = AttemptParseInt(PotentialRecipe[1]);
+                    recipe[2] = AttemptParseInt(PotentialRecipe[2]);
+                    MyPlayer.MyRecipe.ChangeRecipe(recipe);
                     Console.Clear();
                     GamePlay();
                     break;
@@ -108,7 +95,7 @@ namespace LemonadeStand
 
                 case "make":
                     if (MyPlayer.HasMade) { UserInterface.MakingYourLemonade(); GamePlay(); }
-                    int InvTest = MyPlayer.MyInventory.UpdateInventoryRecipe(Recipe);
+                    int InvTest = MyPlayer.MyInventory.UpdateInventoryRecipe(recipe);
                     if (InvTest == 1) { UserInterface.TooMuchChange(InvTest); GamePlay(); }
                     MyPlayer.MakeLemonade();
                     UserInterface.MakingYourLemonade();
@@ -118,60 +105,19 @@ namespace LemonadeStand
                 case "start":
 
                     if (!MyPlayer.HasMade) { UserInterface.MakeYourNade(); GamePlay(); }
-                    int[] CurrentTemp = new int[1];
+                    int CurrentTemp;
                     
-                    CurrentTemp = DetermineDay("daily");
-                        
-                    Proboscis.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    CupChecker(Proboscis.HowMany);
-                    MyPlayer.UpdateDaily(Proboscis.HowMany);
-                    UserInterface.CustomerPurchase(Proboscis.Name, Proboscis.CustomerThought);
+                    CurrentTemp = dayList[counter].temp;
+                    CreateMonkeys();
 
-                    Mandrill.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    CupChecker(Mandrill.HowMany);
-                    MyPlayer.UpdateDaily(Mandrill.HowMany);
-                    UserInterface.CustomerPurchase(Mandrill.Name, Mandrill.CustomerThought);
-
-                    Macaque.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    CupChecker(Macaque.HowMany);
-                    MyPlayer.UpdateDaily(Macaque.HowMany);
-                    UserInterface.CustomerPurchase(Macaque.Name, Macaque.CustomerThought);
-
-                    Howler.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    CupChecker(Howler.HowMany);
-                    MyPlayer.UpdateDaily(Howler.HowMany);
-                    UserInterface.CustomerPurchase(Howler.Name, Howler.CustomerThought);
-
-                    Baboon.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    CupChecker(Baboon.HowMany);
-                    MyPlayer.UpdateDaily(Baboon.HowMany);
-                    UserInterface.CustomerPurchase(Baboon.Name, Baboon.CustomerThought);
-
-                    Orangutan.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    CupChecker(Orangutan.HowMany);
-                    MyPlayer.UpdateDaily(Orangutan.HowMany);
-                    UserInterface.CustomerPurchase(Orangutan.Name, Orangutan.CustomerThought);
-
-                    Bonobo.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    CupChecker(Bonobo.HowMany);
-                    MyPlayer.UpdateDaily(Bonobo.HowMany);
-                    UserInterface.CustomerPurchase(Bonobo.Name, Bonobo.CustomerThought);
-
-                    Gibbon.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    CupChecker(Gibbon.HowMany);
-                    MyPlayer.UpdateDaily(Gibbon.HowMany);
-                    UserInterface.CustomerPurchase(Gibbon.Name, Gibbon.CustomerThought);
-
-                    Gorilla.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    CupChecker(Gorilla.HowMany);
-                    MyPlayer.UpdateDaily(Gorilla.HowMany);
-                    UserInterface.CustomerPurchase(Gorilla.Name, Gorilla.CustomerThought);
-
-                    Chimpanzee.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
-                    CupChecker(Chimpanzee.HowMany);
-                    MyPlayer.UpdateDaily(Chimpanzee.HowMany);
-                    UserInterface.CustomerPurchase(Chimpanzee.Name, Chimpanzee.CustomerThought);
-
+                    foreach(Customer monkey in customerList)
+                    {
+                        monkey.Purchase(MyPlayer.MyRecipe.HowSweet, MyPlayer.MyRecipe.HowCold, MyPlayer.MyPrice, CurrentTemp);
+                        CupChecker(monkey.HowMany);
+                        MyPlayer.UpdateDaily(monkey.HowMany);
+                        UserInterface.CustomerPurchase(monkey.Name, monkey.CustomerThought);
+                    }
+                   
                     UpdateEndOfDay();
                     break;
 
@@ -182,88 +128,52 @@ namespace LemonadeStand
             }
         }
 
-        public int[] DetermineDay(string which)
+       
+        public void CreateDays()
         {
-            switch (counter)
+            for(int i = 7; i > 0; i--)
             {
-                case 1:
-                    //need to increase counter once day two starts
-                    if(which == "daily")
-                    {
-                        //Day1 = new Day(7, 1);
-                        return Day1.temp;
-                    }
-                    else
-                    {
-                        return Day1.SevenDay;
-                    }
-                case 2:
-                    if (which == "daily")
-                    {
-                        //Day2 = new Day(6, 2);
-                        return Day2.temp;
-                    }
-                    else
-                    {
-                        return Day2.SevenDay;
-                    }
-
-                case 3:
-                    if (which == "daily")
-                    {
-                        //Day3 = new Day(5, 3);
-                        return Day3.temp;
-                    }
-                    else
-                    {
-                        return Day3.SevenDay;
-                    }
-
-                case 4:
-                    if (which == "daily")
-                    {
-                        //Day4 = new Day(4, 4);
-                        return Day4.temp;
-                    }
-                    else
-                    {
-                        return Day4.SevenDay;
-                    }
-
-                case 5:
-                    if (which == "daily")
-                    {
-                       // Day5 = new Day(3, 5);
-                        return Day5.temp;
-                    }
-                    else
-                    {
-                        return Day5.SevenDay;
-                    }
-
-                case 6:
-                    if (which == "daily")
-                    {
-                        //Day6 = new Day(2, 6);
-                        return Day6.temp;
-                    }
-                    else
-                    {
-                        return Day6.SevenDay;
-                    }
-
-                case 7:
-                    if (which == "daily")
-                    {
-                        //Day7 = new Day(1, 7);
-                        return Day7.temp;
-                    }
-                    else
-                    {
-                        return Day7.SevenDay;
-                    }
+                dayList.Add(new Day(i, 8 - i));
             }
-            return Day1.temp;
+        }
+
+        public void CreateMonkeys()
+        {
+            int preference;
+            int price;
+            int name;
+            string postName;
+            for(int i = 0; i < 15; i++)
+            {
+                preference = CustomerRandomizer(1,4);
+                price = CustomerRandomizer(5, 15);
+                name = CustomerRandomizer(0,9);
+                postName = NameChooser(name);
+                customerList.Add(new Customer(preference,price,postName));
+            }
+        }
+
+        public int CustomerRandomizer(int low, int high)
+        {
+            int preference = gen.Next(low,high);
+            return preference;
+        }
+
+        public string NameChooser(int randomNumber)
+        {
+            List<string> names = new List<string>();
+            names.Add("Alex, the Monkey");
+            names.Add("KingKong, the APE");
+            names.Add("Vivian, the Baboon");
+            names.Add("BigBoy, the Proboscis");
+            names.Add("Devin, the Chimp");
+            names.Add("Bradford, the Gorilla");
+            names.Add("Jimmy, the baby monkey");
+            names.Add("Louis, the Orangutan");
+            names.Add("Gill, the Tiger");
+            names.Add("Aiai, the Bonobo");
+
+            return names[randomNumber];
         }
 
         public void PurchaseItems(string UserInput, int TotalPurchased) {
@@ -312,7 +222,7 @@ namespace LemonadeStand
         public void CounterChecker()
         {
             counter++;
-            if(counter > 7)
+            if(counter > 6)
             {
                 string BeginAgain = UserInterface.EndGame();
                 if(BeginAgain == "yes")
@@ -387,7 +297,7 @@ namespace LemonadeStand
             HasCups = MyPlayer.MyInventory.UpdateInventoryGame(HowMany);
             if (!HasCups) { UserInterface.NoMoreCups(); UpdateEndOfDay(); }
         }
-        //Here as well I moved this code to have it`s own method since it has the specific job of updating other methods
+        //Here as well, I moved this code to have it`s own method since it has the specific job of updating other methods
         public void UpdateEndOfDay()
         {
             MyPlayer.UpdateTotal(GameStore.CashSpent);
