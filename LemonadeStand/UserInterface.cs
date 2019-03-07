@@ -29,12 +29,19 @@ namespace LemonadeStand
             MainMenuResponses.Add(" To start the next day, type START");
         }
 
+        public void PlaceBanana()
+        {
+            GameDesign.PlaceBanana();
+            Console.SetCursorPosition(Console.WindowLeft, Console.WindowTop + Console.WindowHeight - 1);
+        }
+
         public string Welcome()
         {            
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Welcome to your jungle Banana-nade stand! To start things off, what is your name? \n");
-           //GameDesign.PlaceBanana();
+            PlaceBanana();
             string name = Console.ReadLine();
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
             return name;
         }
@@ -54,9 +61,9 @@ namespace LemonadeStand
 
             GameDesign.CreateVerticalBorder();
             GameDesign.CreateHorizontalBorder();
-            GameDesign.PlaceBanana();
+            PlaceBanana();
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.SetCursorPosition(Console.WindowLeft, Console.WindowTop + Console.WindowHeight -1);
+
             string whatNext = Console.ReadLine();
             Console.Clear();
             return whatNext.ToLower();
@@ -83,10 +90,10 @@ namespace LemonadeStand
         {
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write(" Your current inventory is: " + totalInventory[0] + " bananas, ");
-            Console.Write(totalInventory[1] + " bag(s) of bugs, ");
-            Console.Write(totalInventory[2] + " bag(s) of ice, and ");
-            Console.WriteLine(totalInventory[3] + " cup(s).\n");
+            Console.Write(" INVENTORY: \n " + totalInventory[0] + " Bananas \n ");
+            Console.Write(totalInventory[1] + " Bag(s) of Bugs \n ");
+            Console.Write(totalInventory[2] + " Bag(s) of Ice \n ");
+            Console.WriteLine(totalInventory[3] + " Cup(s).\n");
             Console.WriteLine(" You currently have " + totalMoney + " grubs in your account.\n");
             Console.ForegroundColor = ConsoleColor.White;
         }
@@ -104,7 +111,10 @@ namespace LemonadeStand
             Console.Write(storePrices[2] + " grubs per bag of ice, and ");
             Console.WriteLine(storePrices[3] + " grubs per cup. \n");
             Console.WriteLine("What would you like to purchase? Bananas, bugs, ice, cups, or all?\n");
+            PlaceBanana();
+            Console.BackgroundColor = ConsoleColor.Black;
             string UserInput = Console.ReadLine();
+            Console.Clear();
             return UserInput.ToLower();
         }
 
@@ -112,6 +122,8 @@ namespace LemonadeStand
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("How many would you like to purchase?\n");
+            PlaceBanana();
+            Console.BackgroundColor = ConsoleColor.Black;
             string amountPurchased = Console.ReadLine();
             Console.Clear();
             return amountPurchased;
@@ -120,6 +132,7 @@ namespace LemonadeStand
         public void ViewRecipe(int[] currentRecipe)
         {
             Console.WriteLine("The current recipe is: " + currentRecipe[0] + " banana(s), " + currentRecipe[1] + " bag(s) of bugs, " + currentRecipe[2] +" bag(s) of ice.\n");
+            
         }
 
         public string[] ChangeRecipe()
@@ -187,6 +200,13 @@ namespace LemonadeStand
         public void NoMoreStuff()
         {
             Console.WriteLine("Looks like you ran out of money AND inventory. What a bummer!");
+        }
+
+        public void EnterToContinue()
+        {
+            Console.WriteLine("Now that you have seen the customer`s opinions, press any key to continue");
+            Console.ReadLine();
+            Console.Clear();
         }
                 
         public string EndGame()

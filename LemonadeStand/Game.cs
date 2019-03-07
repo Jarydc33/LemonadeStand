@@ -104,7 +104,7 @@ namespace LemonadeStand
 
                     if (!MyPlayer.hasMade) { UserInterface.MakeYourNade(); GamePlay(); }
                     int CurrentTemp;
-                    
+                    Console.Clear();
                     CurrentTemp = days[counter].temperature;
                     days[counter].CreateMonkeys();
 
@@ -115,8 +115,8 @@ namespace LemonadeStand
                         MyPlayer.UpdateDaily(monkey.howMany);
                         UserInterface.CustomerPurchase(monkey.name, monkey.customerThought);
                     }
-                   
-                    UpdateEndOfDay();
+                    UserInterface.EnterToContinue();
+                    UpdateEndOfDay();                    
 
                     break;
 

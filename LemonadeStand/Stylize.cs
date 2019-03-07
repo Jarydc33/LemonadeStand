@@ -18,7 +18,7 @@ namespace LemonadeStand
             Console.ForegroundColor = ConsoleColor.Yellow;
             if(topBottomCounter % 2 == 0)
             {
-                Console.SetCursorPosition(Console.WindowLeft, Console.WindowHeight - 24);
+                Console.SetCursorPosition(Console.WindowLeft, Console.WindowHeight - 21);
             }
             
             for (int i = 0; i < Console.WindowWidth; i++)
@@ -32,7 +32,7 @@ namespace LemonadeStand
         public void CreateVerticalBorder()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            for (int i = 7; i < Console.WindowHeight - 6; i++)
+            for (int i = 10; i < Console.WindowHeight - 5; i++)
             {
                 Console.SetCursorPosition(Console.WindowLeft,i);
                 Console.Write("|");
@@ -84,11 +84,6 @@ namespace LemonadeStand
 
 
 
-
-        }
-
-        public void InventoryDashboard()
-        {
 
         }
 
