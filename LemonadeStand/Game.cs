@@ -14,8 +14,8 @@ namespace LemonadeStand
         public List<Player> players;
         public string whatNext;
         public int gameCounter;
+        public bool multiPlayer;
         public int playerCounter;
-        int numberPlayers;
         int[] recipe;
 
         public Game()
@@ -37,12 +37,12 @@ namespace LemonadeStand
             switch (playerNumber)
             {
                 case "friend":
-                    numberPlayers = 2;
                     MyPlayer2 = new Player();
+                    multiPlayer = true;
                     break;
 
                 case "none":
-                    numberPlayers = 1;
+                    multiPlayer = false;
                     break;
 
                 default:
@@ -54,14 +54,14 @@ namespace LemonadeStand
             players = new List<Player>();
             players.Add(MyPlayer1);
 
-            string[] name = UserInterface.Welcome(numberPlayers);
+            string[] name = UserInterface.Welcome(multiPlayer);
             MyPlayer1.myName = name[0];
-            if(numberPlayers == 2)
+            if(multiPlayer)
             {
                 MyPlayer2.myName = name[1];
                 players.Add(MyPlayer2);
             }
-            UserInterface.WhoseTurn(players[playerCounter % 2].myName);
+            if (multiPlayer) { UserInterface.WhoseTurn(players[playerCounter % 2].myName); }
             Console.Clear();
             GamePlay();
         }
@@ -153,7 +153,7 @@ namespace LemonadeStand
                         players[playerCounter % 2].UpdateDaily(monkey.howMany);
                         UserInterface.CustomerPurchase(monkey.name, monkey.customerThought);
                     }
-                    UserInterface.EnterToContinue();
+                    //UserInterface.EnterToContinue();
                     UpdateEndOfDay();                    
 
                     break;
@@ -220,10 +220,15 @@ namespace LemonadeStand
 
         public void CounterChecker()
         {
-            if(playerCounter % 2 == 1)
+            if(!multiPlayer)
             {
                 gameCounter++;
             }
+            else if(playerCounter % 2 == 1)
+            {
+                gameCounter++;
+            }
+
             if(gameCounter > 6)
             {
                 string beginAgain = UserInterface.EndGame();
@@ -262,7 +267,7 @@ namespace LemonadeStand
 
         public void CheckContinuingGameplay()
         {
-            if(MyPlayer1.myGrubs == 0)
+            if(players[playerCounter % 2].myGrubs == 0)
             {
                 for(int i = 0; i < players[playerCounter % 2].MyInventory.totalInventory.Length; i++)
                 {
@@ -293,8 +298,7 @@ namespace LemonadeStand
             CounterChecker();
             players[playerCounter % 2].ResetDaily();
             GameStore.CashSpentReset();
-            playerCounter++;
-            UserInterface.WhoseTurn(players[playerCounter % 2].myName);
+            if(multiPlayer) { playerCounter++; UserInterface.WhoseTurn(players[playerCounter % 2].myName); }
             Console.Clear();
             GamePlay();
         }

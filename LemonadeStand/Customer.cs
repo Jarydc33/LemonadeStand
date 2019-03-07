@@ -56,12 +56,27 @@ namespace LemonadeStand
             }
         }
 
+        public bool ensurePrice(int currentPrice)
+        {
+            bool rightPrice;
+            if(currentPrice > priceRoof)
+            {
+                customerThought = opinion[1];
+                howMany = 0;
+                rightPrice = false;
+                return rightPrice;
+            }
+            rightPrice = true;
+            return rightPrice;
+        }
+
         public void makePurchase(int howSweet, int howCold, int currentPrice, int temperature)
         {
             determineBaseWeather(temperature);
-            bool hasIce = ensureIceAmount(howCold, currentPrice);
+            bool rightPrice = ensurePrice(currentPrice);
+            bool hasIce = ensureIceAmount(howCold, currentPrice);            
 
-            if(hasIce)
+            if(hasIce && rightPrice)
             {
                 switch (howSweet)
                 {

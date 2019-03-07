@@ -42,13 +42,13 @@ namespace LemonadeStand
             return playerNumber.ToLower();
         }
 
-        public string[] Welcome(int numberPlayers)
+        public string[] Welcome(bool multiplePlayer)
         {            
             Console.ForegroundColor = ConsoleColor.Blue;
             string[] name;
             Console.WriteLine("Welcome to your jungle Banana-nade stand! To start things off, Player1, what is your name? \n");
 
-            if (numberPlayers == 2)
+            if (multiplePlayer)
             {
                 name = new string[2];
                 name[0] = Console.ReadLine();
@@ -195,7 +195,9 @@ namespace LemonadeStand
             Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("Well done! You have made it to the end of Day " + day + ".\n" +
                 "Your daily profit is: " + dailyProfit +" grubs.\n" +
-                "Your total profit/loss is: " + totalProfit +" grubs.\n");
+                "Your total profit/loss is: " + totalProfit +" grubs.\n" + 
+                "Press any key to continue to the next day!");
+            Console.ReadLine();
         }
 
         public void NoMoreCups()
