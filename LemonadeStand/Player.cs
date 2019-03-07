@@ -15,13 +15,12 @@ namespace LemonadeStand
         public int totalProfit;
         public bool hasMade;
 
-        public Player(string myname)
+        public Player()
         {
             MyInventory = new Inventory();
             MyRecipe = new Recipe();
             myGrubs = 65;
             myPrice = 6;
-            myName = myname;
             dailyProfit = 0;
             totalProfit = 0;
             hasMade = false;

@@ -35,12 +35,32 @@ namespace LemonadeStand
             Console.SetCursorPosition(Console.WindowLeft, Console.WindowTop + Console.WindowHeight - 1);
         }
 
-        public string Welcome()
+        public string NumberOfPlayers()
+        {
+            Console.WriteLine("To kick things off, do you want to play against a friend or by yourself. Type friend or none.");
+            string playerNumber = Console.ReadLine();
+            return playerNumber.ToLower();
+        }
+
+        public string[] Welcome(int numberPlayers)
         {            
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Welcome to your jungle Banana-nade stand! To start things off, what is your name? \n");
-            PlaceBanana();
-            string name = Console.ReadLine();
+            string[] name;
+            Console.WriteLine("Welcome to your jungle Banana-nade stand! To start things off, Player1, what is your name? \n");
+
+            if (numberPlayers == 2)
+            {
+                name = new string[2];
+                name[0] = Console.ReadLine();
+                Console.WriteLine("And Player2, what is your name?");
+                name[1] = Console.ReadLine();
+            }
+            else
+            {
+                name = new string[1];
+                name[0] = Console.ReadLine();
+            }
+            
             Console.Clear();
             return name;
         }
@@ -66,6 +86,12 @@ namespace LemonadeStand
             string whatNext = Console.ReadLine();
             Console.Clear();
             return whatNext.ToLower();
+        }
+
+        public void WhoseTurn(string userName)
+        {
+                Console.WriteLine(userName + " ,it is your turn! Press any key to start.");
+                Console.ReadLine();            
         }
 
         public void OutputDaily(int temp)
