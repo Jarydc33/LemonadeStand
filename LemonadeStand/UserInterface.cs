@@ -9,16 +9,31 @@ namespace LemonadeStand
     {
 
         public Stylize GameDesign;
+        public List<string> MainMenuResponses;
 
         public UserInterface()
         {
             GameDesign = new Stylize();
+            MainMenuResponses = new List<string>();
+            AddMainMenuResponses();
+        }
+
+        public void AddMainMenuResponses()
+        {
+            MainMenuResponses.Add(" To view the daily forecast, type DAILY \n");
+            MainMenuResponses.Add(" To view the weekly forecast, type WEEKLY \n");
+            MainMenuResponses.Add(" To visit the store, type STORE \n");
+            MainMenuResponses.Add(" To change your current recipe, type RECIPE \n");
+            MainMenuResponses.Add(" To change the price of the banana-nade, type PRICE \n");
+            MainMenuResponses.Add(" To make the banana-nade, type MAKE \n");
+            MainMenuResponses.Add(" To start the next day, type START");
         }
 
         public string Welcome()
-        {
+        {            
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Welcome to your jungle Banana-nade stand! To start things off, what is your name? \n");
+           //GameDesign.PlaceBanana();
             string name = Console.ReadLine();
             Console.Clear();
             return name;
@@ -26,22 +41,21 @@ namespace LemonadeStand
 
         public string MainMenu(string Name)
         {
+            Console.BackgroundColor = ConsoleColor.Black;
             GameDesign.CreateHorizontalBorder();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine(" Welcome to the Main Menu " + Name + ", what would you like to do? \n");
+            Console.WriteLine(" Welcome to your jungle Banana-nade stand, " + Name + ". What would you like to do? \n");
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine(" To view the daily forecast, type DAILY \n");
-            Console.WriteLine(" To view the weekly forecast, type WEEKLY \n");
-            Console.WriteLine(" To visit the store, type STORE \n");
-            Console.WriteLine(" To change your current recipe, type RECIPE \n");
-            Console.WriteLine(" To change the price of the banana-nade, type PRICE \n");
-            Console.WriteLine(" To make the banana-nade, type MAKE \n");
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine(" To start the next day, type START");
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
+
+            foreach(string item in MainMenuResponses)
+            {
+                Console.WriteLine(item);
+            }
+
             GameDesign.CreateVerticalBorder();
             GameDesign.CreateHorizontalBorder();
             GameDesign.PlaceBanana();
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(Console.WindowLeft, Console.WindowTop + Console.WindowHeight -1);
             string whatNext = Console.ReadLine();
             Console.Clear();
@@ -67,7 +81,7 @@ namespace LemonadeStand
 
         public void ViewInventory(int[] totalInventory, double totalMoney)
         {
-            
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write(" Your current inventory is: " + totalInventory[0] + " bananas, ");
             Console.Write(totalInventory[1] + " bag(s) of bugs, ");
