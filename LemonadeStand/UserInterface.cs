@@ -41,7 +41,6 @@ namespace LemonadeStand
             Console.WriteLine("Welcome to your jungle Banana-nade stand! To start things off, what is your name? \n");
             PlaceBanana();
             string name = Console.ReadLine();
-            Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
             return name;
         }
@@ -112,7 +111,6 @@ namespace LemonadeStand
             Console.WriteLine(storePrices[3] + " grubs per cup. \n");
             Console.WriteLine("What would you like to purchase? Bananas, bugs, ice, cups, or all?\n");
             PlaceBanana();
-            Console.BackgroundColor = ConsoleColor.Black;
             string UserInput = Console.ReadLine();
             Console.Clear();
             return UserInput.ToLower();
@@ -123,7 +121,6 @@ namespace LemonadeStand
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("How many would you like to purchase?\n");
             PlaceBanana();
-            Console.BackgroundColor = ConsoleColor.Black;
             string amountPurchased = Console.ReadLine();
             Console.Clear();
             return amountPurchased;
@@ -146,6 +143,7 @@ namespace LemonadeStand
             recipe[1] = Console.ReadLine();
             Console.WriteLine("How many bags of ice would you like to add?");
             recipe[2] = Console.ReadLine();
+            Console.Clear();
             return recipe;
         }
         
@@ -159,7 +157,9 @@ namespace LemonadeStand
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("What would you like to set the price as? (Hint: an average price is about 8 grubs) \n");
+            PlaceBanana();
             string price = Console.ReadLine();
+            Console.Clear();
             return price;
 
         }

@@ -30,7 +30,7 @@ namespace LemonadeStand
 
         public void GamePlay()
         {            
-            UserInterface.ViewInventory(MyPlayer.MyInventory.totalInventory, MyPlayer.myMoney);
+            UserInterface.ViewInventory(MyPlayer.MyInventory.totalInventory, MyPlayer.myGrubs);
             CheckContinuingGameplay();
             whatNext = UserInterface.MainMenu(name);
 
@@ -139,28 +139,28 @@ namespace LemonadeStand
                
         public void PurchaseItems(string userInput, int totalPurchased) {
                         
-            int startingCash = MyPlayer.myMoney;
+            int startingCash = MyPlayer.myGrubs;
 
             switch (userInput)
             {
                 case "bananas":
-                    MyPlayer.myMoney = GameStore.Cashier(1, MyPlayer.myMoney, MyPlayer.MyInventory.totalInventory, totalPurchased);
+                    MyPlayer.myGrubs = GameStore.Cashier(1, MyPlayer.myGrubs, MyPlayer.MyInventory.totalInventory, totalPurchased);
                     break;
 
                 case "bugs":
-                    MyPlayer.myMoney = GameStore.Cashier(2, MyPlayer.myMoney, MyPlayer.MyInventory.totalInventory, totalPurchased);
+                    MyPlayer.myGrubs = GameStore.Cashier(2, MyPlayer.myGrubs, MyPlayer.MyInventory.totalInventory, totalPurchased);
                     break;
 
                 case "ice":
-                    MyPlayer.myMoney = GameStore.Cashier(3, MyPlayer.myMoney, MyPlayer.MyInventory.totalInventory, totalPurchased);
+                    MyPlayer.myGrubs = GameStore.Cashier(3, MyPlayer.myGrubs, MyPlayer.MyInventory.totalInventory, totalPurchased);
                     break;
 
                 case "cups":
-                    MyPlayer.myMoney = GameStore.Cashier(4, MyPlayer.myMoney, MyPlayer.MyInventory.totalInventory, totalPurchased);
+                    MyPlayer.myGrubs = GameStore.Cashier(4, MyPlayer.myGrubs, MyPlayer.MyInventory.totalInventory, totalPurchased);
                     break;
 
                 case "all":
-                    MyPlayer.myMoney = GameStore.Cashier(5, MyPlayer.myMoney, MyPlayer.MyInventory.totalInventory, totalPurchased);
+                    MyPlayer.myGrubs = GameStore.Cashier(5, MyPlayer.myGrubs, MyPlayer.MyInventory.totalInventory, totalPurchased);
                     break;
 
                 default:
@@ -169,7 +169,7 @@ namespace LemonadeStand
                     break;
             }
 
-            if(MyPlayer.myMoney == startingCash)
+            if(MyPlayer.myGrubs == startingCash)
             {
                 UserInterface.SpentTooMuch();                
                 GamePlay();
@@ -221,7 +221,7 @@ namespace LemonadeStand
 
         public void CheckContinuingGameplay()
         {
-            if(MyPlayer.myMoney == 0)
+            if(MyPlayer.myGrubs == 0)
             {
                 for(int i = 0; i < MyPlayer.MyInventory.totalInventory.Length; i++)
                 {
@@ -246,7 +246,7 @@ namespace LemonadeStand
         {
             MyPlayer.UpdateTotal(GameStore.cashSpent);
 
-            if (MyPlayer.totalProfit > 0) { MyPlayer.myMoney += MyPlayer.dailyProfit; }
+            if (MyPlayer.totalProfit > 0) { MyPlayer.myGrubs += MyPlayer.dailyProfit; }
 
             UserInterface.DailySummary(counter+1, MyPlayer.dailyProfit, MyPlayer.totalProfit);
             CounterChecker();

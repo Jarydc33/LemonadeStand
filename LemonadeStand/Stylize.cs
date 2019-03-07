@@ -77,6 +77,7 @@ namespace LemonadeStand
             Console.Write("  ");
             Console.SetCursorPosition(94, 18);
             Console.Write(" ");
+            Console.BackgroundColor = ConsoleColor.Black;
 
 
 
