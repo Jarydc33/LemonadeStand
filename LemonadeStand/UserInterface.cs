@@ -236,6 +236,23 @@ namespace LemonadeStand
             Console.ReadLine();
             Console.Clear();
         }
+
+        public void MultiplayerWinner(int winner, int player1Grubs, int player2Grubs)
+        {
+            Console.WriteLine("Player 1 has " + player1Grubs + " grubs");
+            Console.WriteLine("Player 2 has " + player2Grubs + " grubs");
+
+            if (winner == 1)
+            {                
+                Console.WriteLine("Player 1 has won! Congrats!");
+            }
+            else
+            {
+                Console.WriteLine("Player 2 has won! Congrats!");
+            }
+            Console.WriteLine("Press any key to finish up the game!");
+            Console.ReadLine();
+        }
                 
         public string EndGame()
         {

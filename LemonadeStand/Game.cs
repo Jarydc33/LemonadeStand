@@ -153,7 +153,6 @@ namespace LemonadeStand
                         players[playerCounter % 2].UpdateDaily(monkey.howMany);
                         UserInterface.CustomerPurchase(monkey.name, monkey.customerThought);
                     }
-                    //UserInterface.EnterToContinue();
                     UpdateEndOfDay();                    
 
                     break;
@@ -231,6 +230,8 @@ namespace LemonadeStand
 
             if(gameCounter > 6)
             {
+                if (multiPlayer) { CompareScores(); }
+
                 string beginAgain = UserInterface.EndGame();
                 if(beginAgain == "yes")
                 {
@@ -286,6 +287,16 @@ namespace LemonadeStand
             bool HasCups = true;
             HasCups = players[playerCounter % 2].MyInventory.UpdateInventoryGame(HowMany);
             if (!HasCups) { UserInterface.NoMoreCups(); UpdateEndOfDay(); }
+        }
+
+        public void CompareScores()
+        {
+            int score = 0;
+            if(players[0].myGrubs > players[1].myGrubs)
+            {
+                score = 1;
+            }
+            UserInterface.MultiplayerWinner(score, players[0].myGrubs, players[1].myGrubs);
         }
         
         public void UpdateEndOfDay()
