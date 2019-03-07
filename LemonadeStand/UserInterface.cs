@@ -6,10 +6,13 @@ namespace LemonadeStand
 {
     //static
     public class UserInterface
-    {  
+    {
+
+        public Stylize GameDesign;
+
         public UserInterface()
         {
-            
+            GameDesign = new Stylize();
         }
 
         public string Welcome()
@@ -22,19 +25,24 @@ namespace LemonadeStand
         }
 
         public string MainMenu(string Name)
-        {            
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Welcome to the Main Menu " + Name + ", what would you like to do? \n");
+        {
+            GameDesign.CreateHorizontalBorder();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(" Welcome to the Main Menu " + Name + ", what would you like to do? \n");
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("To view the daily forecast, type DAILY \n");
-            Console.WriteLine("To view the weekly forecast, type WEEKLY \n");
-            Console.WriteLine("To visit the store, type STORE \n");
-            Console.WriteLine("To change your current recipe, type RECIPE \n");
-            Console.WriteLine("To change the price of the banana-nade, type PRICE \n");
-            Console.WriteLine("To make the banana-nade, type MAKE \n");
+            Console.WriteLine(" To view the daily forecast, type DAILY \n");
+            Console.WriteLine(" To view the weekly forecast, type WEEKLY \n");
+            Console.WriteLine(" To visit the store, type STORE \n");
+            Console.WriteLine(" To change your current recipe, type RECIPE \n");
+            Console.WriteLine(" To change the price of the banana-nade, type PRICE \n");
+            Console.WriteLine(" To make the banana-nade, type MAKE \n");
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("To start the next day, type START \n");
+            Console.WriteLine(" To start the next day, type START");
             Console.ForegroundColor = ConsoleColor.DarkGreen;
+            GameDesign.CreateVerticalBorder();
+            GameDesign.CreateHorizontalBorder();
+            GameDesign.PlaceBanana();
+            Console.SetCursorPosition(Console.WindowLeft, Console.WindowTop + Console.WindowHeight -1);
             string whatNext = Console.ReadLine();
             Console.Clear();
             return whatNext.ToLower();
@@ -59,16 +67,14 @@ namespace LemonadeStand
 
         public void ViewInventory(int[] totalInventory, double totalMoney)
         {
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write("Your current inventory is: " + totalInventory[0] + " bananas, ");
+            Console.Write(" Your current inventory is: " + totalInventory[0] + " bananas, ");
             Console.Write(totalInventory[1] + " bag(s) of bugs, ");
             Console.Write(totalInventory[2] + " bag(s) of ice, and ");
             Console.WriteLine(totalInventory[3] + " cup(s).\n");
-            Console.WriteLine("You currently have " + totalMoney + " grubs in your account.\n");
+            Console.WriteLine(" You currently have " + totalMoney + " grubs in your account.\n");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("----------------------------------------------------------------------------------------------------");
         }
 
         public void DefaultResponse()
