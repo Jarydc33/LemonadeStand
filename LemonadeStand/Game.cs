@@ -9,19 +9,17 @@ namespace LemonadeStand
         public UserInterface UserInterface;
         public Player MyPlayer;
         public Store GameStore;
-        public List<Customer> customerList;
-        public List<Day> dayList;
+        public List<Day> days;
         public string name;
         public string whatNext;
         public int counter;
-        Random gen = new Random();
         int[] recipe;
 
         public Game()
         {
             UserInterface = new UserInterface();
             GameStore = new Store();
-            dayList = new List<Day>();
+            days = new List<Day>();
             counter = 0;
             recipe = new int[3] { 1, 1, 1 };            
             name = UserInterface.Welcome();
@@ -40,14 +38,14 @@ namespace LemonadeStand
             {
                 case "daily":
 
-                    UserInterface.OutputDaily(dayList[counter].temp);
+                    UserInterface.OutputDaily(days[counter].temperature);
                     GamePlay();
 
                     break;
 
                 case "weekly":
 
-                    UserInterface.OutputWeekly(dayList[counter].sevenDay);
+                    UserInterface.OutputWeekly(days[counter].sevenDayForecast);
                     GamePlay();
 
                     break;
@@ -107,12 +105,12 @@ namespace LemonadeStand
                     if (!MyPlayer.hasMade) { UserInterface.MakeYourNade(); GamePlay(); }
                     int CurrentTemp;
                     
-                    CurrentTemp = dayList[counter].temp;
-                    CreateMonkeys();
+                    CurrentTemp = days[counter].temperature;
+                    days[counter].CreateMonkeys();
 
-                    foreach(Customer monkey in customerList)
+                    foreach(Customer monkey in days[counter].customers)
                     {
-                        monkey.Purchase(MyPlayer.MyRecipe.howSweet, MyPlayer.MyRecipe.howCold, MyPlayer.myPrice, CurrentTemp);
+                        monkey.makePurchase(MyPlayer.MyRecipe.howSweet, MyPlayer.MyRecipe.howCold, MyPlayer.myPrice, CurrentTemp);
                         CupChecker(monkey.howMany);
                         MyPlayer.UpdateDaily(monkey.howMany);
                         UserInterface.CustomerPurchase(monkey.name, monkey.customerThought);
@@ -135,50 +133,10 @@ namespace LemonadeStand
         {
             for(int i = 7; i > 0; i--)
             {
-                dayList.Add(new Day(i, 8 - i));
+                days.Add(new Day(i, 8 - i));
             }
         }
-
-        public void CreateMonkeys()
-        {
-            customerList = new List<Customer>();
-            int preference;
-            int price;
-            int name;
-            string postName;
-            for(int i = 0; i < 15; i++)
-            {
-                preference = CustomerRandomizer(1,4);
-                price = CustomerRandomizer(5, 15);
-                name = CustomerRandomizer(0,9);
-                postName = NameChooser(name);
-                customerList.Add(new Customer(preference,price,postName));
-            }
-        }
-
-        public int CustomerRandomizer(int low, int high)
-        {
-            int preference = gen.Next(low,high);
-            return preference;
-        }
-
-        public string NameChooser(int randomNumber)
-        {
-            List<string> names = new List<string>();
-            names.Add("Alex, the Monkey");
-            names.Add("KingKong, the APE");
-            names.Add("Vivian, the Baboon");
-            names.Add("BigBoy, the Proboscis");
-            names.Add("Devin, the Chimp");
-            names.Add("Bradford, the Gorilla");
-            names.Add("Jimmy, the baby monkey");
-            names.Add("Louis, the Orangutan");
-            names.Add("Gill, the Tiger");
-            names.Add("Aiai, the Bonobo");
-
-            return names[randomNumber];
-        }
-
+               
         public void PurchaseItems(string userInput, int totalPurchased) {
                         
             int startingCash = MyPlayer.myMoney;

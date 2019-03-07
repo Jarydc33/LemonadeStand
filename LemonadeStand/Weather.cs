@@ -6,34 +6,32 @@ namespace LemonadeStand
 {
     public class Weather
     {
-        public int DaysLeft;
-        public int[] TempPlace;
-        public int DailyTemp;
-        public int CurrentDay;
-        Random rnd;
+        public int daysLeft;
+        public int[] temperatureHolder;
+        public int dailyTemp;
+        public int currentDay;
 
         public Weather(int daysleft, int currentday)
         {
-            DaysLeft = daysleft;
-            TempPlace = new int[daysleft];
-            CurrentDay = currentday - 1;
-            rnd = new Random();
+            daysLeft = daysleft;
+            temperatureHolder = new int[daysleft];
+            currentDay = currentday - 1;
         }
 
-        public int[] SevenForecast()
+        public int[] SevenForecast(Random newRandom)
         {            
-            for (int i = 0; i < DaysLeft; i++)
+            for (int i = 0; i < daysLeft; i++)
             {
-                TempPlace[i] = rnd.Next(75, 105);
+                temperatureHolder[i] = newRandom.Next(75, 105);
             }
-            return TempPlace;
+            return temperatureHolder;
         }
 
-        public int DailyWeather()
+        public int DailyWeather(Random newRandom)
         {
-            DailyTemp = TempPlace[0];
-            DailyTemp = rnd.Next(DailyTemp - 2, DailyTemp +2);
-            return DailyTemp;
+            dailyTemp = temperatureHolder[0];
+            dailyTemp = newRandom.Next(dailyTemp - 2, dailyTemp +2);
+            return dailyTemp;
            
         }
 

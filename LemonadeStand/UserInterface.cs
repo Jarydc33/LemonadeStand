@@ -4,6 +4,7 @@ using System.Text;
 
 namespace LemonadeStand
 {
+    //static
     public class UserInterface
     {  
         public UserInterface()

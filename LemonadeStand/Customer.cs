@@ -26,29 +26,42 @@ namespace LemonadeStand
             opinion[4] = " says: You didn`t even put ice in this!";
         }
 
-        public void Purchase(int howSweet, int howCold, double currentPrice, int temperature)
+        public void determineBaseWeather(int temperature)
         {
             howMany = 0;
-            if(temperature > 85)
+            if (temperature > 85)
             {
                 howMany = 1;
             }
-            else if(temperature > 100)
+            else if (temperature > 100)
             {
                 howMany = 2;
             }
+        }
 
-            if(howCold == 0)
+        public bool ensureIceAmount(int howCold, int currentPrice)
+        {
+            bool hasIce;
+            if (howCold == 0)
             {
                 customerThought = opinion[4];
                 howMany = 0;
-            }
-            else if(currentPrice > priceRoof)
-            {
-                customerThought = opinion[1];
-                howMany = 0;
+                hasIce = false;
+                return hasIce;
             }
             else
+            {
+                hasIce = true;
+                return hasIce;
+            }
+        }
+
+        public void makePurchase(int howSweet, int howCold, int currentPrice, int temperature)
+        {
+            determineBaseWeather(temperature);
+            bool hasIce = ensureIceAmount(howCold, currentPrice);
+
+            if(hasIce)
             {
                 switch (howSweet)
                 {
