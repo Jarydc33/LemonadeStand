@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Net;
+using Newtonsoft.Json.Linq;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace LemonadeStand
 {
@@ -17,6 +23,7 @@ namespace LemonadeStand
         public bool multiPlayer;
         public int playerCounter;
         int[] recipe;
+        
 
         public Game()
         {
@@ -32,7 +39,7 @@ namespace LemonadeStand
         }
 
         public void PlayerChooser()
-        {
+        {          
             string playerNumber = UserInterface.NumberOfPlayers();
             switch (playerNumber)
             {
@@ -173,7 +180,7 @@ namespace LemonadeStand
                 days.Add(new Day(i, 8 - i));
             }
         }
-               
+
         public void PurchaseItems(string userInput, int totalPurchased) {
                         
             int startingCash = players[playerCounter % 2].myGrubs;

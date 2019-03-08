@@ -3,63 +3,63 @@
   <Class Name="LemonadeStand.UserInterface" Collapsed="true">
     <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>iAAAgAAIBCAAABAgAAAAAAAQQBAAAAEAAAAAKAgQYUA=</HashCode>
+      <HashCode>iAAAgAAIRCAAABAggAAAAAAQQBACEAEAAIECKggQYUA=</HashCode>
       <FileName>UserInterface.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Store" Collapsed="true">
     <Position X="7" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAARAAAAAIAQAAABAAAAAQAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAAAABABAAEIEAAAABAAAAAAAAAAAAAAAAAAAIAAgAA=</HashCode>
       <FileName>Store.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="LemonadeStand.Weather" Collapsed="true">
+  <Class Name="LemonadeStand.RealWeather" Collapsed="true">
     <Position X="1.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEIAAAAAAQAAAAAAAAAAAAAAAAAACAAQAAAQAABAA=</HashCode>
-      <FileName>Weather.cs</FileName>
+      <HashCode>AAAAQAAAAAAAAAAABAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RealWeather.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Day" Collapsed="true">
     <Position X="2.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAJAAAAAAAAAQAAACAAAAAAAQAAAA=</HashCode>
+      <HashCode>AAAAAAEBAAACAAAAAAAAAAAAACQAAABQACQAgAAAAAA=</HashCode>
       <FileName>Day.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Customer" Collapsed="true">
     <Position X="6.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQBAAAAAAAAAEAAAAAAAAYAAAAAAEAAAABAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAEAAAAgBBAAAAQAAEBAAAIEAAAAAAQAA=</HashCode>
       <FileName>Customer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Inventory" Collapsed="true">
     <Position X="7.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAEABAAAAACAAAAAAAAAAAAAAAAAAAAAgAASAA=</HashCode>
+      <HashCode>gAEAAAAEAABAAAAAAAAAAAAAAAAAAAAAAAAIAhAAAAA=</HashCode>
       <FileName>Inventory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Player" Collapsed="true">
     <Position X="6.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABAEAAAAABAABAgABAABAAAAAAKAAAQAAQAQA=</HashCode>
+      <HashCode>AAAAAAAAAAAABAAAAABAgQBAAAAAAAAQKBAAQAAAAUA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Recipe" Collapsed="true">
     <Position X="8" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABCAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAEAAAAABAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Recipe.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LemonadeStand.Game">
     <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>GAEAAARAAIJADAEAADCAAPQPAIAAEAEkAAAAAAAkAgA=</HashCode>
+      <HashCode>EAAAAAKAAIJARAAIABAAQAACAAAAAAAgYAAAAMAkAAA=</HashCode>
       <FileName>Game.cs</FileName>
     </TypeIdentifier>
   </Class>

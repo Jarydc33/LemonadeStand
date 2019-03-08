@@ -29,11 +29,11 @@ namespace LemonadeStand
         public void determineBaseWeather(int temperature)
         {
             howMany = 0;
-            if (temperature > 85)
+            if (temperature > 32)
             {
                 howMany = 1;
             }
-            else if (temperature > 100)
+            else if (temperature > 40)
             {
                 howMany = 2;
             }
