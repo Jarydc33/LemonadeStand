@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 
 namespace LemonadeStand
 {
@@ -13,12 +11,12 @@ namespace LemonadeStand
         public string customerThought;
         public int priceRoof;
 
-        public Customer(int preference, int priceRoof, string name)
+        public Customer(int newPreference, int newPriceRoof, string newName)
         {            
             opinion = new string[5];
-            this.preference = preference;
-            this.priceRoof = priceRoof;
-            this.name = name;
+            preference = newPreference;
+            priceRoof = newPriceRoof;
+            name = newName;
             opinion[0] = " says: This is too banana-y for me!";
             opinion[1] = " says: This is too expensive for me!";
             opinion[2] = " says: Yummy. This is delicious!";

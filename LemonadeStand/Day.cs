@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace LemonadeStand
 {
     public class Day
-    {        
+    {   //Please note on this page that all of the commented out lines were used when I initially generated my own weather. I left them in so you can see both methods that were used.
         //Weather Forecast;
         public RealWeather Weather;
         public List<Customer> customers;
@@ -34,24 +34,21 @@ namespace LemonadeStand
 
         public void GenerateWeather(int currentDay)
         {
-            //if(currentDay == 1)
-            //{
-                string strurltest = "https://api.darksky.net/forecast/776a8b1c0ed27586644bc263c3652fb7/43.035,-87.9225?exclude=minutely,hourly,alerts,flags";
-                WebRequest requestObject = WebRequest.Create(strurltest);
-                requestObject.Method = "GET";
-                HttpWebResponse responseObject = null;
-                responseObject = (HttpWebResponse)requestObject.GetResponse();
+            string strurltest = "https://api.darksky.net/forecast/776a8b1c0ed27586644bc263c3652fb7/43.035,-87.9225?exclude=minutely,hourly,alerts,flags";
+            WebRequest requestObject = WebRequest.Create(strurltest);
+            requestObject.Method = "GET";
+            HttpWebResponse responseObject = null;
+            responseObject = (HttpWebResponse)requestObject.GetResponse();
 
-                string strresulttest = null;
-                using (Stream stream = responseObject.GetResponseStream())
-                {
-                    StreamReader sr = new StreamReader(stream);
-                    strresulttest = sr.ReadToEnd();
-                    sr.Close();
-                }
+            string strresulttest = null;
+            using (Stream stream = responseObject.GetResponseStream())
+            {
+                StreamReader sr = new StreamReader(stream);
+                strresulttest = sr.ReadToEnd();
+                sr.Close();
+            }
 
-                Weather = JsonConvert.DeserializeObject<RealWeather>(strresulttest);
-            //}
+            Weather = JsonConvert.DeserializeObject<RealWeather>(strresulttest);
             
         }
 
@@ -59,6 +56,7 @@ namespace LemonadeStand
         {
             //temperature = Forecast.DailyWeather(numberGenerator);
             temperature = (int)Weather.daily.data[currentDay-1].temperatureHigh;
+            temperature = numberGenerator.Next(temperature-2, temperature+3);
 
         }
 
@@ -68,7 +66,7 @@ namespace LemonadeStand
 
             for (int i = 0; i < daysLeft; i++)
             {
-                sevenDayForecast[i] = (int)Weather.daily.data[i].temperatureHigh;
+                sevenDayForecast[i] = (int)Weather.daily.data[(currentDay - 1)+i].temperatureHigh;
             }
 
         }

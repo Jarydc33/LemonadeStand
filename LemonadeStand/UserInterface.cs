@@ -4,7 +4,8 @@ using System.Text;
 
 namespace LemonadeStand
 {
-    //static
+    //SOLID Design principle #1: The entirety of this class utilizes the Single Responsibility design principle. It is used specifically  
+    //to get input and then output words to the screen. 
     public class UserInterface
     {
 
@@ -90,7 +91,7 @@ namespace LemonadeStand
 
         public void WhoseTurn(string userName)
         {
-                Console.WriteLine(userName + " ,it is your turn! Press any key to start.");
+                Console.WriteLine(userName + ", it is your turn! Press any key to start.");
                 Console.ReadLine();            
         }
 

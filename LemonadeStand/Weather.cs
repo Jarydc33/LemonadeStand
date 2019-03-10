@@ -6,6 +6,8 @@ namespace LemonadeStand
 {
     public class Weather
     {
+        //This class was used when I was generating my own weather. I was able to incorporate the weather API so this class is no longer used. It has been left in so
+        //the instructors can see how I initially did the weather.
         public int daysLeft;
         public int[] temperatureHolder;
         public int dailyTemp;
